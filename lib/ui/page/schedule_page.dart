@@ -164,39 +164,6 @@ class _SchedulePageState extends State<SchedulePage> {
         ),
       ),
     );
-//    return Padding(
-//      padding: EdgeInsets.symmetric(horizontal: 20.0),
-//      child: Row(
-//        textBaseline: TextBaseline.alphabetic,
-//        mainAxisAlignment: MainAxisAlignment.start,
-//        crossAxisAlignment: CrossAxisAlignment.start,
-//        children: <Widget>[
-//          Text(
-//            time,
-//            textAlign: TextAlign.start,
-//            style: TextStyle(
-//              fontSize: 18.0,
-//              height: 1.23,
-//              fontWeight: FontWeight.w500,
-//              color: BerezkaColors.orange,
-//            ),
-//          ),
-//          Flexible(
-//            child: Text(
-//              name,
-//              textAlign: TextAlign.start,
-//              softWrap: true,
-//              style: TextStyle(
-//                fontSize: 18.0,
-//                height: 1.23,
-//                fontWeight: FontWeight.w500,
-//                color: BerezkaColors.title,
-//              ),
-//            ),
-//          ),
-//        ],
-//      ),
-//    );
   }
 
   Widget _dayFilters() {

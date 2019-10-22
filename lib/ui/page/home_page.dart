@@ -406,11 +406,14 @@ class _HomePageState extends State<HomePage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           SizedBox(width: 10.0),
-          Image.asset(
-            activityItem.icon,
-            width: 74.0,
-            height: 74.0,
-            fit: BoxFit.cover,
+          ClipRRect(
+            borderRadius: BorderRadius.circular(13),
+            child: Image.asset(
+              activityItem.icon,
+              width: 74.0,
+              height: 74.0,
+              fit: BoxFit.cover,
+            ),
           ),
           SizedBox(width: 20.0),
           Column(

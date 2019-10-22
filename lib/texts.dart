@@ -24,7 +24,7 @@ class Texts {
       "Введите код приглашения из лагеря, в который поедет ваш ребенок";
   static const enter = "Войти";
   static const take5Photo = "Сделайте 5 фотографий лица ребенка";
-  static const sleep = "Спит в отрядном домике";
+  static const walk = "Прогуливается возле озера";
   static const sport = "Занимается спортом";
   static const chill = "Отдыхает в отрядном домике";
   static const eat = "Обедает в главной столовой";
@@ -32,4 +32,8 @@ class Texts {
   static const camp = "Расписание\n'I&Camp'";
   static const morning = "Утро";
   static const evening = "Вечер";
+  static const info =
+      "Программа лагеря построена так, что создаются реальные возможности для того, чтобы дети получили что-то важное для их развития";
+  static const buy = "Купить";
+
 }

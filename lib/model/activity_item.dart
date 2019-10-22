@@ -13,12 +13,12 @@ abstract class ActivityItem
     implements Built<ActivityItem, ActivityItemBuilder> {
   static Serializer<ActivityItem> get serializer => _$activityItemSerializer;
 
-  static final sleep = ActivityItem._create(
+  static final walk = ActivityItem._create(
     value: 0,
-    icon: BerezkaIcons.sleep,
-    name: Texts.sleep,
-    duration: "14:45 – 16:34",
-    color: BerezkaColors.sleep,
+    icon: BerezkaIcons.walk,
+    name: Texts.walk,
+    duration: "30-45 минут",
+    color: BerezkaColors.walk,
   );
 
   static final sport = ActivityItem._create(
@@ -58,7 +58,7 @@ abstract class ActivityItem
   ActivityItem._();
 
   static final values = [
-    sleep,
+    walk,
     sport,
     chill,
     eat,

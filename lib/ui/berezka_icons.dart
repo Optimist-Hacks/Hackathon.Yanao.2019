@@ -9,9 +9,9 @@ class BerezkaIcons {
   static const angry = "assets/angry.png";
   static const welcome = "assets/welcome.png";
   static const shot = "assets/shot.svg";
-  static const sport = "assets/sport.png";
-  static const chill = "assets/chill.png";
-  static const eat = "assets/eat.png";
-  static const sleep = "assets/sleep.png";
+  static const sport = "assets/sport.gif";
+  static const chill = "assets/chill.gif";
+  static const eat = "assets/eat.gif";
+  static const walk = "assets/walk.gif";
   static const logo = "assets/logo.png";
 }
