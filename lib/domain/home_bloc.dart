@@ -82,10 +82,10 @@ class HomeBloc {
     Log.d(_tag, "On response $response");
 
     final countFormat = NumberFormat("#,###.##", "ru");
-    final km = countFormat.format(response.distance / 1000.0).toString();
+    final km = countFormat.format(response.distance / 1000.0);
     final actionDuration =
-        countFormat.format(response.actionDuration / 60000.0).toString();
-    final energy = countFormat.format(response.energy).toString();
+        (response.actionDuration / 60000.0).ceil().toString();
+    final energy = countFormat.format(response.energy);
     final rating = response.rating.toString();
     final activityItems = response.actionTimetable
         .map((action) => ActivityItem.fromValue(action))

@@ -154,7 +154,7 @@ class _HomePageState extends State<HomePage> {
             dayFilter.name,
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 15.0,
+              fontSize: 16.0,
               height: 1.115,
               fontWeight: FontWeight.w500,
               color: _state.activeDayFilter == dayFilter
