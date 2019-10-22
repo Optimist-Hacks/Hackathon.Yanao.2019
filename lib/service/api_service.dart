@@ -28,8 +28,7 @@ class ApiService {
     Map<String, String> params = {
       'token': '$token',
     };
-    final body = "{'token':'$token'}";
-    List<dynamic> jsonResponse = await _post(
+    Map<String, dynamic> jsonResponse = await _post(
       '/parent/login',
       params: params,
     );
