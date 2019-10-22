@@ -29,4 +29,7 @@ class Texts {
   static const chill = "Отдыхает в отрядном домике";
   static const eat = "Обедает в главной столовой";
   static const hour = "ч";
+  static const camp = "Расписание\n'I&Camp'";
+  static const morning = "Утро";
+  static const evening = "Вечер";
 }
