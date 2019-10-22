@@ -1,8 +1,9 @@
+import 'package:flutter_app/model/activity_item.dart';
 import 'package:flutter_app/model/day_filter.dart';
-import 'package:flutter_app/model/navigation_item.dart';
 import 'package:flutter_app/model/state/home_state.dart';
-import 'package:flutter_app/model/state/main_state.dart';
+import 'package:flutter_app/ui/berezka_icons.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:built_collection/built_collection.dart';
 
 class HomeBloc {
   final _stateSubject = BehaviorSubject<HomeState>();
@@ -11,8 +12,14 @@ class HomeBloc {
   Stream<HomeState> get state => _stateSubject;
 
   HomeBloc() {
-    initState =
-        HomeState((b) => b..activeDayFilter = DayFilter.day.toBuilder());
+    initState = HomeState((b) => b
+      ..activeDayFilter = DayFilter.day.toBuilder()
+      ..activityItems = BuiltSet<ActivityItem>([
+        ActivityItem((b) => b
+          ..icon = BerezkaIcons.basketball
+          ..name = "Сейчас играет в баскетбол"
+          ..duration = "30-45 минут")
+      ]).toBuilder());
     _stateSubject.add(initState);
   }
 

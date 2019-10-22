@@ -9,13 +9,18 @@ part of 'home_state.dart';
 class _$HomeState extends HomeState {
   @override
   final DayFilter activeDayFilter;
+  @override
+  final BuiltSet<ActivityItem> activityItems;
 
   factory _$HomeState([void Function(HomeStateBuilder) updates]) =>
       (new HomeStateBuilder()..update(updates)).build();
 
-  _$HomeState._({this.activeDayFilter}) : super._() {
+  _$HomeState._({this.activeDayFilter, this.activityItems}) : super._() {
     if (activeDayFilter == null) {
       throw new BuiltValueNullFieldError('HomeState', 'activeDayFilter');
+    }
+    if (activityItems == null) {
+      throw new BuiltValueNullFieldError('HomeState', 'activityItems');
     }
   }
 
@@ -29,18 +34,21 @@ class _$HomeState extends HomeState {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is HomeState && activeDayFilter == other.activeDayFilter;
+    return other is HomeState &&
+        activeDayFilter == other.activeDayFilter &&
+        activityItems == other.activityItems;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(0, activeDayFilter.hashCode));
+    return $jf($jc($jc(0, activeDayFilter.hashCode), activityItems.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('HomeState')
-          ..add('activeDayFilter', activeDayFilter))
+          ..add('activeDayFilter', activeDayFilter)
+          ..add('activityItems', activityItems))
         .toString();
   }
 }
@@ -54,11 +62,18 @@ class HomeStateBuilder implements Builder<HomeState, HomeStateBuilder> {
   set activeDayFilter(DayFilterBuilder activeDayFilter) =>
       _$this._activeDayFilter = activeDayFilter;
 
+  SetBuilder<ActivityItem> _activityItems;
+  SetBuilder<ActivityItem> get activityItems =>
+      _$this._activityItems ??= new SetBuilder<ActivityItem>();
+  set activityItems(SetBuilder<ActivityItem> activityItems) =>
+      _$this._activityItems = activityItems;
+
   HomeStateBuilder();
 
   HomeStateBuilder get _$this {
     if (_$v != null) {
       _activeDayFilter = _$v.activeDayFilter?.toBuilder();
+      _activityItems = _$v.activityItems?.toBuilder();
       _$v = null;
     }
     return this;
@@ -81,13 +96,17 @@ class HomeStateBuilder implements Builder<HomeState, HomeStateBuilder> {
   _$HomeState build() {
     _$HomeState _$result;
     try {
-      _$result =
-          _$v ?? new _$HomeState._(activeDayFilter: activeDayFilter.build());
+      _$result = _$v ??
+          new _$HomeState._(
+              activeDayFilter: activeDayFilter.build(),
+              activityItems: activityItems.build());
     } catch (_) {
       String _$failedField;
       try {
         _$failedField = 'activeDayFilter';
         activeDayFilter.build();
+        _$failedField = 'activityItems';
+        activityItems.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'HomeState', _$failedField, e.toString());
