@@ -7,7 +7,9 @@ import 'package:flutter_app/model/day_filter.dart';
 import 'package:flutter_app/model/state/home_state.dart';
 import 'package:flutter_app/texts.dart';
 import 'package:flutter_app/ui/berezka_colors.dart';
+import 'package:flutter_app/ui/berezka_icons.dart';
 import 'package:flutter_app/utils/log.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rxdart/rxdart.dart';
 
 const _tag = "main_page";
@@ -51,7 +53,16 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             SizedBox(height: 70.0),
-            _avatar(),
+            Stack(
+              children: <Widget>[
+                Center(child: _avatar()),
+                Positioned(
+                  right: 80.0,
+                  top: 20.0,
+                  child: _phone(),
+                ),
+              ],
+            ),
             SizedBox(height: 20.0),
             _title(),
             SizedBox(height: 5.0),
@@ -124,6 +135,29 @@ class _HomePageState extends State<HomePage> {
         width: 86.0,
         height: 86.0,
         fit: BoxFit.cover,
+      ),
+    );
+  }
+
+  Widget _phone() {
+    return SizedBox(
+      width: 49.0,
+      height: 49.0,
+      child: RaisedButton(
+        padding: EdgeInsets.zero,
+        elevation: 0.0,
+        onPressed: () => _onClickPhone,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(18.0),
+        ),
+        color: BerezkaColors.passive,
+        child: SvgPicture.asset(
+          BerezkaIcons.phone,
+          width: 17.0,
+          height: 17.0,
+          fit: BoxFit.cover,
+          color: BerezkaColors.active,
+        ),
       ),
     );
   }
@@ -305,5 +339,9 @@ class _HomePageState extends State<HomePage> {
   void _onClickDayFilter(DayFilter dayFilter) {
     Log.d(_tag, "Click day filter $dayFilter");
     _homeBloc.onClickDayFilter(dayFilter);
+  }
+
+  void _onClickPhone() {
+    Log.d(_tag, "Click phone");
   }
 }
