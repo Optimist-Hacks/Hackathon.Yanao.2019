@@ -6,6 +6,7 @@ import 'package:flutter_app/model/navigation_item.dart';
 import 'package:flutter_app/model/state/main_state.dart';
 import 'package:flutter_app/ui/berezka_colors.dart';
 import 'package:flutter_app/ui/page/home_page.dart';
+import 'package:flutter_app/ui/page/schedule_page.dart';
 import 'package:flutter_app/utils/log.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rxdart/rxdart.dart';
@@ -91,6 +92,7 @@ class _MainPageState extends State<MainPage> {
     if (_state.activeNavigationItem == NavigationItem.home) {
       return HomePage();
     } else if (_state.activeNavigationItem == NavigationItem.schedule) {
+      return SchedulePage();
     } else if (_state.activeNavigationItem == NavigationItem.info) {
     } else {
       throw UnsupportedError("Unsupported NavigationItem value");

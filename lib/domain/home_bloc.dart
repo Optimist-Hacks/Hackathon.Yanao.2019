@@ -71,7 +71,8 @@ class HomeBloc {
       ..energy = energy
       ..rating = rating
       ..activityItems = SetBuilder<ActivityItem>(activityItems)
-      ..moods = moods);
+      ..moods = moods
+      ..friends = response.bestFriends.toBuilder());
   }
 
   void onClickDayFilter(DayFilter dayFilter) {

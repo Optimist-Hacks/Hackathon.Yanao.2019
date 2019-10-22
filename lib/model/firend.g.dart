@@ -25,7 +25,7 @@ class _$FriendSerializer implements StructuredSerializer<Friend> {
           specifiedType: const FullType(String)),
       'timeTogether',
       serializers.serialize(object.timeTogether,
-          specifiedType: const FullType(String)),
+          specifiedType: const FullType(double)),
     ];
 
     return result;
@@ -52,7 +52,7 @@ class _$FriendSerializer implements StructuredSerializer<Friend> {
           break;
         case 'timeTogether':
           result.timeTogether = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(double)) as double;
           break;
       }
     }
@@ -67,7 +67,7 @@ class _$Friend extends Friend {
   @override
   final String photoUrl;
   @override
-  final String timeTogether;
+  final double timeTogether;
 
   factory _$Friend([void Function(FriendBuilder) updates]) =>
       (new FriendBuilder()..update(updates)).build();
@@ -127,9 +127,9 @@ class FriendBuilder implements Builder<Friend, FriendBuilder> {
   String get photoUrl => _$this._photoUrl;
   set photoUrl(String photoUrl) => _$this._photoUrl = photoUrl;
 
-  String _timeTogether;
-  String get timeTogether => _$this._timeTogether;
-  set timeTogether(String timeTogether) => _$this._timeTogether = timeTogether;
+  double _timeTogether;
+  double get timeTogether => _$this._timeTogether;
+  set timeTogether(double timeTogether) => _$this._timeTogether = timeTogether;
 
   FriendBuilder();
 

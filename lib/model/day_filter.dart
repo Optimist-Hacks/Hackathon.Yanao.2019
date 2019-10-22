@@ -23,6 +23,16 @@ abstract class DayFilter implements Built<DayFilter, DayFilterBuilder> {
     name: Texts.period,
   );
 
+  static final today = DayFilter._create(
+    value: 3,
+    name: Texts.today,
+  );
+
+  static final tomorrow = DayFilter._create(
+    value: 4,
+    name: Texts.tomorrow,
+  );
+
   int get value;
 
   String get name;

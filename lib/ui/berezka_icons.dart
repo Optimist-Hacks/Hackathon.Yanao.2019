@@ -13,4 +13,5 @@ class BerezkaIcons {
   static const chill = "assets/chill.png";
   static const eat = "assets/eat.png";
   static const sleep = "assets/sleep.png";
+  static const logo = "assets/logo.png";
 }

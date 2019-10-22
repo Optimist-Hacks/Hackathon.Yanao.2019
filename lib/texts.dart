@@ -13,6 +13,7 @@ class Texts {
   static const kkal = "ккал";
   static const calorie = "Калории";
   static const today = "Сегодня";
+  static const tomorrow = "Завтра";
   static const mood = "Настроение";
   static const funny = "Веселый";
   static const calm = "Спокойный";
@@ -27,4 +28,5 @@ class Texts {
   static const sport = "Занимается спортом";
   static const chill = "Отдыхает в отрядном домике";
   static const eat = "Обедает в главной столовой";
+  static const hour = "ч";
 }

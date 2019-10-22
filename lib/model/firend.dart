@@ -10,7 +10,7 @@ abstract class Friend implements Built<Friend, FriendBuilder> {
 
   String get photoUrl;
 
-  String get timeTogether;
+  double get timeTogether;
 
   Friend._();
 

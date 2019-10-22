@@ -19,7 +19,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:rxdart/rxdart.dart';
 
-const _tag = "main_page";
+const _tag = "home_page";
 
 class HomePage extends StatefulWidget {
   @override
@@ -651,7 +651,7 @@ class _HomePageState extends State<HomePage> {
               color: BerezkaColors.title.withOpacity(0.05),
             ),
             child: Text(
-              friend.timeTogether,
+              (friend.timeTogether / 60000.0).ceil().toString() + Texts.hour,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: BerezkaColors.title,
