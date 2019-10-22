@@ -1,4 +1,8 @@
 class Texts {
+  static bool isEmpty(String text) {
+    return text == null || text.isEmpty;
+  }
+
   static const appName = "Berezks";
   static const day = "День";
   static const week = "Неделя";
@@ -15,4 +19,6 @@ class Texts {
   static const sad = "Грустный";
   static const angry = "Злой";
   static const bestFriends = "Лучшие друзья";
+  static const inviteDescription =
+      "Введите код приглашения из лагеря, в который поедет ваш ребенок";
 }

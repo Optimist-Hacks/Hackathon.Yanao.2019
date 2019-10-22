@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/service/preferences_service.dart';
+import 'package:flutter_app/ui/page/login_page.dart';
 import 'package:flutter_app/ui/page/main_page.dart';
 import 'package:flutter_app/texts.dart';
 import 'package:provider/provider.dart';
@@ -6,8 +8,11 @@ import 'package:provider/provider.dart';
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final preferencesService = PreferencesService();
     return MultiProvider(
-      providers: [],
+      providers: [
+        Provider.value(value: preferencesService),
+      ],
       child: Builder(
         builder: (context) => MaterialApp(
           onGenerateTitle: (BuildContext context) => Texts.appName,
@@ -22,9 +27,13 @@ class App extends StatelessWidget {
             fontFamily: 'Averta CY',
           ),
           routes: {
+            LoginPage.routeName: (context) => LoginPage(),
             MainPage.routeName: (context) => MainPage(),
           },
-          home: MainPage(),
+          home: Texts.isEmpty(
+                  Provider.of<PreferencesService>(context).getCurrentUser())
+              ? LoginPage()
+              : MainPage(),
         ),
       ),
     );
