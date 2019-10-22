@@ -24,7 +24,7 @@ abstract class HomeState implements Built<HomeState, HomeStateBuilder> {
 
   BuiltSet<ActivityItem> get activityItems;
 
-  BuiltMap<Mood, double> get moods;
+  BuiltMap<Mood, int> get moods;
 
   BuiltSet<Friend> get friends;
 

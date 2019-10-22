@@ -457,6 +457,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _emotionStats() {
+    if (_state.moods.isEmpty) {
+      return Container();
+    }
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 20.0),
       decoration: BoxDecoration(
@@ -499,7 +502,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _moodItem(MapEntry<Mood, double> entry) {
+  Widget _moodItem(MapEntry<Mood, int> entry) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
@@ -563,6 +566,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _friends() {
+    if (_state.friends.isEmpty) {
+      return Container();
+    }
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 20.0),
       decoration: BoxDecoration(

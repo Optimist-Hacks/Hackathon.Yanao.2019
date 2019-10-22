@@ -24,7 +24,7 @@ class _$HomeState extends HomeState {
   @override
   final BuiltSet<ActivityItem> activityItems;
   @override
-  final BuiltMap<Mood, double> moods;
+  final BuiltMap<Mood, int> moods;
   @override
   final BuiltSet<Friend> friends;
 
@@ -175,10 +175,10 @@ class HomeStateBuilder implements Builder<HomeState, HomeStateBuilder> {
   set activityItems(SetBuilder<ActivityItem> activityItems) =>
       _$this._activityItems = activityItems;
 
-  MapBuilder<Mood, double> _moods;
-  MapBuilder<Mood, double> get moods =>
-      _$this._moods ??= new MapBuilder<Mood, double>();
-  set moods(MapBuilder<Mood, double> moods) => _$this._moods = moods;
+  MapBuilder<Mood, int> _moods;
+  MapBuilder<Mood, int> get moods =>
+      _$this._moods ??= new MapBuilder<Mood, int>();
+  set moods(MapBuilder<Mood, int> moods) => _$this._moods = moods;
 
   SetBuilder<Friend> _friends;
   SetBuilder<Friend> get friends =>

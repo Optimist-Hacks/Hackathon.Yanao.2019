@@ -32,49 +32,10 @@ class HomeBloc {
         ..rating = ""
         ..activeDayFilter = DayFilter.day.toBuilder()
         ..activityItems = SetBuilder<ActivityItem>()
-        ..moods = BuiltMap<Mood, double>({
-          Mood.funny: 45.0,
-          Mood.calm: 34.0,
-          Mood.sad: 17.0,
-          Mood.angry: 12.0
-        }).toBuilder()
+        ..moods = MapBuilder<Mood, int>()
         ..friends = BuiltSet<Friend>().toBuilder(),
     );
-//    initState = HomeState(
-//      (b) => b
-//        ..activeDayFilter = DayFilter.day.toBuilder()
-//        ..activityItems = BuiltSet<ActivityItem>([
-//          ActivityItem((b) => b
-//            ..icon = BerezkaIcons.basketball
-//            ..name = "Сейчас играет в баскетбол"
-//            ..duration = "30-45 минут")
-//        ]).toBuilder()
-//        ..moods = BuiltMap<Mood, double>({
-//          Mood.funny: 45.0,
-//          Mood.calm: 34.0,
-//          Mood.sad: 17.0,
-//          Mood.angry: 12.0
-//        }).toBuilder()
-//        ..friends = BuiltSet<Friend>([
-//          Friend((b) => b
-//            ..icon =
-//                "https://www.dropbox.com/s/e41zuwyrnnzxatp/preview.png?raw=1"
-//            ..name = "Алина Кладикова"
-//            ..duration = "1ч"),
-//          Friend((b) => b
-//            ..icon =
-//                "https://www.dropbox.com/s/e41zuwyrnnzxatp/preview.png?raw=1"
-//            ..name = "Андрей Алексеев"
-//            ..duration = "2ч"),
-//          Friend((b) => b
-//            ..icon =
-//                "https://www.dropbox.com/s/e41zuwyrnnzxatp/preview.png?raw=1"
-//            ..name = "ПОКУПКИНС"
-//            ..duration = "3ч")
-//        ]).toBuilder(),
-//    );
     _stateSubject.add(initState);
-
     _apiService.childStats(_preferencesService.getChild()).then(_onResponse);
   }
 
@@ -91,6 +52,17 @@ class HomeBloc {
         .map((action) => ActivityItem.fromValue(action))
         .toSet();
 
+    final moods = BuiltMap<Mood, int>({
+      Mood.funny:
+          (response.emotions.happiness + response.emotions.surprise).ceil(),
+      Mood.calm: response.emotions.neutral.ceil(),
+      Mood.sad: (response.emotions.contempt +
+              response.emotions.disgust +
+              response.emotions.sadness)
+          .ceil(),
+      Mood.angry: (response.emotions.anger + response.emotions.fear).ceil(),
+    }).toBuilder();
+
     _updateState((b) => b
       ..name = response.name
       ..squad = response.squad
@@ -98,7 +70,8 @@ class HomeBloc {
       ..actionDuration = actionDuration
       ..energy = energy
       ..rating = rating
-      ..activityItems = SetBuilder<ActivityItem>(activityItems));
+      ..activityItems = SetBuilder<ActivityItem>(activityItems)
+      ..moods = moods);
   }
 
   void onClickDayFilter(DayFilter dayFilter) {
