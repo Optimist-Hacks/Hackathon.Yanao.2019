@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/domain/main_bloc.dart';
+import 'package:flutter_app/domain/home_bloc.dart';
 import 'package:flutter_app/model/day_filter.dart';
-import 'package:flutter_app/model/state/main_state.dart';
+import 'package:flutter_app/model/state/home_state.dart';
 import 'package:flutter_app/texts.dart';
 import 'package:flutter_app/ui/berezka_colors.dart';
 import 'package:flutter_app/utils/log.dart';
@@ -12,24 +12,21 @@ import 'package:rxdart/rxdart.dart';
 
 const _tag = "main_page";
 
-class MainPage extends StatefulWidget {
-  static const routeName = '/main';
-
+class HomePage extends StatefulWidget {
   @override
-  _MainPageState createState() => _MainPageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _MainPageState extends State<MainPage> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+class _HomePageState extends State<HomePage> {
   final CompositeSubscription _subscriptions = CompositeSubscription();
-  MainBloc _mainBloc;
-  MainState _state;
+  HomeBloc _homeBloc;
+  HomeState _state;
 
   @override
   void didChangeDependencies() {
-    if (_mainBloc == null) {
-      _mainBloc = MainBloc();
-      StreamSubscription subscription = _mainBloc.state.listen((state) {
+    if (_homeBloc == null) {
+      _homeBloc = HomeBloc();
+      StreamSubscription subscription = _homeBloc.state.listen((state) {
         setState(() => _state = state);
       });
       _subscriptions.add(subscription);
@@ -48,14 +45,6 @@ class _MainPageState extends State<MainPage> {
       return Center(child: CircularProgressIndicator());
     }
 
-    return Scaffold(
-      key: _scaffoldKey,
-      body: _body(),
-      backgroundColor: BerezkaColors.white,
-    );
-  }
-
-  Widget _body() {
     return SingleChildScrollView(
       child: Center(
         child: Column(
@@ -102,7 +91,7 @@ class _MainPageState extends State<MainPage> {
         height: 50.0,
         child: RaisedButton(
           elevation: 0.0,
-          onPressed: () => _onClick(dayFilter),
+          onPressed: () => _onClickDayFilter(dayFilter),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(22.0),
           ),
@@ -257,7 +246,7 @@ class _MainPageState extends State<MainPage> {
       children: <Widget>[
         _stat(163, Texts.min, Texts.duration),
         Container(
-          color: BerezkaColors.title.withOpacity(0.4),
+          color: BerezkaColors.title.withOpacity(0.12),
           width: 1.0,
           height: 52.0,
         ),
@@ -313,8 +302,8 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  void _onClick(DayFilter dayFilter) {
+  void _onClickDayFilter(DayFilter dayFilter) {
     Log.d(_tag, "Click day filter $dayFilter");
-    _mainBloc.onClickDayFilter(dayFilter);
+    _homeBloc.onClickDayFilter(dayFilter);
   }
 }

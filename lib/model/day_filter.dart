@@ -51,6 +51,6 @@ abstract class DayFilter implements Built<DayFilter, DayFilterBuilder> {
       }
     }
 
-    throw UnsupportedError("Unsupported PlaceType value");
+    throw UnsupportedError("Unsupported DayFilter value");
   }
 }

@@ -6,4 +6,5 @@ class BerezkaColors {
   static const active = Color(0xFF5442B6);
   static const passive = Color(0xFFF5F5F9);
   static const orange = Color(0xFFE88B75);
+  static const navigation = Color(0xFFD6D9DD);
 }

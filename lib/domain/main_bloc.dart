@@ -1,4 +1,4 @@
-import 'package:flutter_app/model/day_filter.dart';
+import 'package:flutter_app/model/navigation_item.dart';
 import 'package:flutter_app/model/state/main_state.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -10,13 +10,14 @@ class MainBloc {
 
   MainBloc() {
     initState = MainState(
-      (b) => b..activeDayFilter = DayFilter.day.toBuilder(),
+      (b) => b..activeNavigationItem = NavigationItem.home.toBuilder(),
     );
     _stateSubject.add(initState);
   }
 
-  void onClickDayFilter(DayFilter dayFilter) {
-    _updateState((b) => b..activeDayFilter = dayFilter.toBuilder());
+  void onClickNavigation(int index) {
+    _updateState((b) =>
+        b..activeNavigationItem = NavigationItem.fromValue(index).toBuilder());
   }
 
   void _updateState(updates(MainStateBuilder builder)) {

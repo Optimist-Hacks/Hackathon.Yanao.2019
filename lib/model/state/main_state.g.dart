@@ -8,14 +8,14 @@ part of 'main_state.dart';
 
 class _$MainState extends MainState {
   @override
-  final DayFilter activeDayFilter;
+  final NavigationItem activeNavigationItem;
 
   factory _$MainState([void Function(MainStateBuilder) updates]) =>
       (new MainStateBuilder()..update(updates)).build();
 
-  _$MainState._({this.activeDayFilter}) : super._() {
-    if (activeDayFilter == null) {
-      throw new BuiltValueNullFieldError('MainState', 'activeDayFilter');
+  _$MainState._({this.activeNavigationItem}) : super._() {
+    if (activeNavigationItem == null) {
+      throw new BuiltValueNullFieldError('MainState', 'activeNavigationItem');
     }
   }
 
@@ -29,18 +29,19 @@ class _$MainState extends MainState {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is MainState && activeDayFilter == other.activeDayFilter;
+    return other is MainState &&
+        activeNavigationItem == other.activeNavigationItem;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(0, activeDayFilter.hashCode));
+    return $jf($jc(0, activeNavigationItem.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('MainState')
-          ..add('activeDayFilter', activeDayFilter))
+          ..add('activeNavigationItem', activeNavigationItem))
         .toString();
   }
 }
@@ -48,17 +49,17 @@ class _$MainState extends MainState {
 class MainStateBuilder implements Builder<MainState, MainStateBuilder> {
   _$MainState _$v;
 
-  DayFilterBuilder _activeDayFilter;
-  DayFilterBuilder get activeDayFilter =>
-      _$this._activeDayFilter ??= new DayFilterBuilder();
-  set activeDayFilter(DayFilterBuilder activeDayFilter) =>
-      _$this._activeDayFilter = activeDayFilter;
+  NavigationItemBuilder _activeNavigationItem;
+  NavigationItemBuilder get activeNavigationItem =>
+      _$this._activeNavigationItem ??= new NavigationItemBuilder();
+  set activeNavigationItem(NavigationItemBuilder activeNavigationItem) =>
+      _$this._activeNavigationItem = activeNavigationItem;
 
   MainStateBuilder();
 
   MainStateBuilder get _$this {
     if (_$v != null) {
-      _activeDayFilter = _$v.activeDayFilter?.toBuilder();
+      _activeNavigationItem = _$v.activeNavigationItem?.toBuilder();
       _$v = null;
     }
     return this;
@@ -81,13 +82,13 @@ class MainStateBuilder implements Builder<MainState, MainStateBuilder> {
   _$MainState build() {
     _$MainState _$result;
     try {
-      _$result =
-          _$v ?? new _$MainState._(activeDayFilter: activeDayFilter.build());
+      _$result = _$v ??
+          new _$MainState._(activeNavigationItem: activeNavigationItem.build());
     } catch (_) {
       String _$failedField;
       try {
-        _$failedField = 'activeDayFilter';
-        activeDayFilter.build();
+        _$failedField = 'activeNavigationItem';
+        activeNavigationItem.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'MainState', _$failedField, e.toString());
