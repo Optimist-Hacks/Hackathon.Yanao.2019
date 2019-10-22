@@ -5,10 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/domain/home_bloc.dart';
 import 'package:flutter_app/model/activity_item.dart';
 import 'package:flutter_app/model/day_filter.dart';
+import 'package:flutter_app/model/firend.dart';
+import 'package:flutter_app/model/mood.dart';
 import 'package:flutter_app/model/state/home_state.dart';
 import 'package:flutter_app/texts.dart';
 import 'package:flutter_app/ui/berezka_colors.dart';
 import 'package:flutter_app/ui/berezka_icons.dart';
+import 'package:flutter_app/ui/widget/dash.dart';
 import 'package:flutter_app/utils/log.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rxdart/rxdart.dart';
@@ -75,9 +78,25 @@ class _HomePageState extends State<HomePage> {
             _activityStats(),
             SizedBox(height: 30.0),
             _schedule(),
+            SizedBox(height: 30.0),
+            _dash(),
+            SizedBox(height: 30.0),
+            _emotionStats(),
+            SizedBox(height: 30.0),
+            _dash(),
+            SizedBox(height: 30.0),
+            _friends(),
+            SizedBox(height: 30.0),
           ],
         ),
       ),
+    );
+  }
+
+  Container _dash() {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 20.0),
+      child: Dash(color: BerezkaColors.black.withOpacity(0.12)),
     );
   }
 
@@ -411,6 +430,210 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _emotionStats() {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 20.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20.0),
+        color: BerezkaColors.passive,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          SizedBox(height: 25.0),
+          Padding(
+            padding: EdgeInsets.only(left: 24.0),
+            child: Text(
+              Texts.mood,
+              textAlign: TextAlign.start,
+              style: TextStyle(
+                color: BerezkaColors.title,
+                fontSize: 24.0,
+                height: 1.114,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          SizedBox(height: 20.0),
+          SizedBox(
+            height: 210,
+            width: double.maxFinite,
+            child: ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              scrollDirection: Axis.vertical,
+              itemBuilder: (BuildContext context, index) =>
+                  _moodItem(_state.moods.entries.elementAt(index)),
+              itemCount: _state.moods.length,
+            ),
+          ),
+          SizedBox(height: 20.0),
+        ],
+      ),
+    );
+  }
+
+  Widget _moodItem(MapEntry<Mood, double> entry) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+          Stack(
+            alignment: Alignment.center,
+            children: <Widget>[
+              Container(
+                width: 38.0,
+                height: 38.0,
+                decoration: BoxDecoration(
+                  color: entry.key.color.withOpacity(0.2),
+                  shape: BoxShape.circle,
+                ),
+              ),
+              Image.asset(
+                entry.key.path,
+                width: 22.0,
+                height: 22.0,
+                fit: BoxFit.cover,
+              ),
+            ],
+          ),
+          SizedBox(width: 17.0),
+          Text(
+            entry.key.name,
+            textAlign: TextAlign.start,
+            style: TextStyle(
+              color: BerezkaColors.title,
+              fontSize: 16,
+              height: 1.115,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          Expanded(
+            child: SizedBox(),
+          ),
+          Container(
+            alignment: Alignment.center,
+            width: 56.0,
+            height: 28.0,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(14.0),
+              color: BerezkaColors.title.withOpacity(0.05),
+            ),
+            child: Text(
+              "${entry.value}%",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: BerezkaColors.title,
+                fontSize: 16,
+                height: 1.115,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _friends() {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 20.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20.0),
+        color: BerezkaColors.passive,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          SizedBox(height: 25.0),
+          Padding(
+            padding: EdgeInsets.only(left: 24.0),
+            child: Text(
+              Texts.bestFriends,
+              textAlign: TextAlign.start,
+              style: TextStyle(
+                color: BerezkaColors.title,
+                fontSize: 24.0,
+                height: 1.114,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          SizedBox(height: 20.0),
+          SizedBox(
+            width: double.maxFinite,
+            height: 180.0,
+            child: ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              scrollDirection: Axis.vertical,
+              itemBuilder: (BuildContext context, index) =>
+                  _friendItem(_state.friends.elementAt(index)),
+              itemCount: _state.friends.length,
+            ),
+          ),
+          SizedBox(height: 20.0),
+        ],
+      ),
+    );
+  }
+
+  Widget _friendItem(Friend friend) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: CachedNetworkImage(
+              imageUrl: friend.icon,
+              alignment: Alignment.center,
+              width: 44.0,
+              height: 44.0,
+              fit: BoxFit.cover,
+            ),
+          ),
+          SizedBox(width: 25.0),
+          Text(
+            friend.name,
+            maxLines: 2,
+            textAlign: TextAlign.start,
+            style: TextStyle(
+              color: BerezkaColors.title,
+              fontSize: 16,
+              height: 1.115,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          Expanded(
+            child: SizedBox(),
+          ),
+          Container(
+            alignment: Alignment.center,
+            width: 56.0,
+            height: 28.0,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(14.0),
+              color: BerezkaColors.title.withOpacity(0.05),
+            ),
+            child: Text(
+              friend.duration,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: BerezkaColors.title,
+                fontSize: 16,
+                height: 1.115,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
           ),
         ],
       ),

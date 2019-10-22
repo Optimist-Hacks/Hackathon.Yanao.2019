@@ -9,4 +9,10 @@ class Texts {
   static const kkal = "ккал";
   static const calorie = "Калории";
   static const today = "Сегодня";
+  static const mood = "Настроение";
+  static const funny = "Веселый";
+  static const calm = "Спокойный";
+  static const sad = "Грустный";
+  static const angry = "Злой";
+  static const bestFriends = "Лучшие друзья";
 }
