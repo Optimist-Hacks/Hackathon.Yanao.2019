@@ -9,6 +9,7 @@ import 'package:flutter_app/texts.dart';
 import 'package:flutter_app/ui/berezka_colors.dart';
 import 'package:flutter_app/ui/berezka_icons.dart';
 import 'package:flutter_app/ui/page/camera_page.dart';
+import 'package:flutter_app/ui/page/main_page.dart';
 import 'package:flutter_app/utils/log.dart';
 import 'package:provider/provider.dart';
 import 'package:rxdart/rxdart.dart';
@@ -151,8 +152,12 @@ class _LoginPageState extends State<LoginPage> {
     } else {
       Log.d(_tag, "Login success $result");
       _preferencesService.setCurrentUser(result.token);
-      _preferencesService.setChild(result.childrenIds.elementAt(0));
-      Navigator.popAndPushNamed(context, CameraPage.routeName);
+      _preferencesService.setChild(result.children.elementAt(0).id);
+      if (result.children.elementAt(0).photoCount > 0) {
+        Navigator.popAndPushNamed(context, MainPage.routeName);
+      } else {
+        Navigator.popAndPushNamed(context, CameraPage.routeName);
+      }
     }
   }
 

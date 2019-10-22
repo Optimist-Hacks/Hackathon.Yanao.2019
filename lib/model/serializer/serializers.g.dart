@@ -7,13 +7,14 @@ part of 'serializers.dart';
 // **************************************************************************
 
 Serializers _$serializers = (new Serializers().toBuilder()
+      ..add(Child.serializer)
       ..add(ChildResponse.serializer)
       ..add(Emotions.serializer)
       ..add(Friend.serializer)
       ..add(LoginResponse.serializer)
       ..addBuilderFactory(
-          const FullType(BuiltSet, const [const FullType(String)]),
-          () => new SetBuilder<String>())
+          const FullType(BuiltSet, const [const FullType(Child)]),
+          () => new SetBuilder<Child>())
       ..addBuilderFactory(const FullType(BuiltSet, const [const FullType(int)]),
           () => new SetBuilder<int>())
       ..addBuilderFactory(

@@ -1,6 +1,7 @@
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:built_collection/built_collection.dart';
+import 'package:flutter_app/model/child.dart';
 
 part 'login_response.g.dart';
 
@@ -14,7 +15,7 @@ abstract class LoginResponse
 
   String get token;
 
-  BuiltSet<String> get childrenIds;
+  BuiltSet<Child> get children;
 
   LoginResponse._();
 

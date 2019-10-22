@@ -26,10 +26,10 @@ class _$LoginResponseSerializer implements StructuredSerializer<LoginResponse> {
       'token',
       serializers.serialize(object.token,
           specifiedType: const FullType(String)),
-      'childrenIds',
-      serializers.serialize(object.childrenIds,
+      'children',
+      serializers.serialize(object.children,
           specifiedType:
-              const FullType(BuiltSet, const [const FullType(String)])),
+              const FullType(BuiltSet, const [const FullType(Child)])),
     ];
 
     return result;
@@ -59,10 +59,10 @@ class _$LoginResponseSerializer implements StructuredSerializer<LoginResponse> {
           result.token = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
-        case 'childrenIds':
-          result.childrenIds.replace(serializers.deserialize(value,
+        case 'children':
+          result.children.replace(serializers.deserialize(value,
                   specifiedType:
-                      const FullType(BuiltSet, const [const FullType(String)]))
+                      const FullType(BuiltSet, const [const FullType(Child)]))
               as BuiltSet<dynamic>);
           break;
       }
@@ -80,12 +80,12 @@ class _$LoginResponse extends LoginResponse {
   @override
   final String token;
   @override
-  final BuiltSet<String> childrenIds;
+  final BuiltSet<Child> children;
 
   factory _$LoginResponse([void Function(LoginResponseBuilder) updates]) =>
       (new LoginResponseBuilder()..update(updates)).build();
 
-  _$LoginResponse._({this.id, this.name, this.token, this.childrenIds})
+  _$LoginResponse._({this.id, this.name, this.token, this.children})
       : super._() {
     if (id == null) {
       throw new BuiltValueNullFieldError('LoginResponse', 'id');
@@ -96,8 +96,8 @@ class _$LoginResponse extends LoginResponse {
     if (token == null) {
       throw new BuiltValueNullFieldError('LoginResponse', 'token');
     }
-    if (childrenIds == null) {
-      throw new BuiltValueNullFieldError('LoginResponse', 'childrenIds');
+    if (children == null) {
+      throw new BuiltValueNullFieldError('LoginResponse', 'children');
     }
   }
 
@@ -115,13 +115,13 @@ class _$LoginResponse extends LoginResponse {
         id == other.id &&
         name == other.name &&
         token == other.token &&
-        childrenIds == other.childrenIds;
+        children == other.children;
   }
 
   @override
   int get hashCode {
     return $jf($jc($jc($jc($jc(0, id.hashCode), name.hashCode), token.hashCode),
-        childrenIds.hashCode));
+        children.hashCode));
   }
 
   @override
@@ -130,7 +130,7 @@ class _$LoginResponse extends LoginResponse {
           ..add('id', id)
           ..add('name', name)
           ..add('token', token)
-          ..add('childrenIds', childrenIds))
+          ..add('children', children))
         .toString();
   }
 }
@@ -151,11 +151,10 @@ class LoginResponseBuilder
   String get token => _$this._token;
   set token(String token) => _$this._token = token;
 
-  SetBuilder<String> _childrenIds;
-  SetBuilder<String> get childrenIds =>
-      _$this._childrenIds ??= new SetBuilder<String>();
-  set childrenIds(SetBuilder<String> childrenIds) =>
-      _$this._childrenIds = childrenIds;
+  SetBuilder<Child> _children;
+  SetBuilder<Child> get children =>
+      _$this._children ??= new SetBuilder<Child>();
+  set children(SetBuilder<Child> children) => _$this._children = children;
 
   LoginResponseBuilder();
 
@@ -164,7 +163,7 @@ class LoginResponseBuilder
       _id = _$v.id;
       _name = _$v.name;
       _token = _$v.token;
-      _childrenIds = _$v.childrenIds?.toBuilder();
+      _children = _$v.children?.toBuilder();
       _$v = null;
     }
     return this;
@@ -189,15 +188,12 @@ class LoginResponseBuilder
     try {
       _$result = _$v ??
           new _$LoginResponse._(
-              id: id,
-              name: name,
-              token: token,
-              childrenIds: childrenIds.build());
+              id: id, name: name, token: token, children: children.build());
     } catch (_) {
       String _$failedField;
       try {
-        _$failedField = 'childrenIds';
-        childrenIds.build();
+        _$failedField = 'children';
+        children.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'LoginResponse', _$failedField, e.toString());
