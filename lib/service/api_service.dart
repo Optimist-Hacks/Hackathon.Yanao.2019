@@ -3,6 +3,7 @@ import 'dart:convert' show json;
 import 'dart:io';
 
 import 'package:flutter_app/model/serializer/serializers.dart';
+import 'package:flutter_app/model/server/child_response.dart';
 import 'package:flutter_app/model/server/login_response.dart';
 import 'package:flutter_app/service/preferences_service.dart';
 import 'package:flutter_app/utils/log.dart';
@@ -57,6 +58,20 @@ class ApiService {
     Log.d(_tag, "<- POST url = $uri, code = ${response.statusCode}");
 
     return response.statusCode == HttpCode.OK;
+  }
+
+  Future<ChildResponse> childStats(String childId) async {
+    Map<String, String> params = {
+      'childId': '$childId',
+    };
+    Map<String, dynamic> jsonResponse = await _get(
+        'parent/${_preferencesService.getCurrentUser()}/childStats',
+        params: params);
+    if (jsonResponse == null || jsonResponse.isEmpty) {
+      Log.d(_tag, "Response is null or empty");
+      return null;
+    }
+    return deserialize<ChildResponse>(jsonResponse);
   }
 
   Future<dynamic> _get(String path, {Map<String, String> params}) async {

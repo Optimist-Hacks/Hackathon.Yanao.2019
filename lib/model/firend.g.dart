@@ -18,12 +18,13 @@ class _$FriendSerializer implements StructuredSerializer<Friend> {
   Iterable<Object> serialize(Serializers serializers, Friend object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
-      'icon',
-      serializers.serialize(object.icon, specifiedType: const FullType(String)),
       'name',
       serializers.serialize(object.name, specifiedType: const FullType(String)),
-      'duration',
-      serializers.serialize(object.duration,
+      'photoUrl',
+      serializers.serialize(object.photoUrl,
+          specifiedType: const FullType(String)),
+      'timeTogether',
+      serializers.serialize(object.timeTogether,
           specifiedType: const FullType(String)),
     ];
 
@@ -41,16 +42,16 @@ class _$FriendSerializer implements StructuredSerializer<Friend> {
       iterator.moveNext();
       final dynamic value = iterator.current;
       switch (key) {
-        case 'icon':
-          result.icon = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
-          break;
         case 'name':
           result.name = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
-        case 'duration':
-          result.duration = serializers.deserialize(value,
+        case 'photoUrl':
+          result.photoUrl = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'timeTogether':
+          result.timeTogether = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
       }
@@ -62,24 +63,24 @@ class _$FriendSerializer implements StructuredSerializer<Friend> {
 
 class _$Friend extends Friend {
   @override
-  final String icon;
-  @override
   final String name;
   @override
-  final String duration;
+  final String photoUrl;
+  @override
+  final String timeTogether;
 
   factory _$Friend([void Function(FriendBuilder) updates]) =>
       (new FriendBuilder()..update(updates)).build();
 
-  _$Friend._({this.icon, this.name, this.duration}) : super._() {
-    if (icon == null) {
-      throw new BuiltValueNullFieldError('Friend', 'icon');
-    }
+  _$Friend._({this.name, this.photoUrl, this.timeTogether}) : super._() {
     if (name == null) {
       throw new BuiltValueNullFieldError('Friend', 'name');
     }
-    if (duration == null) {
-      throw new BuiltValueNullFieldError('Friend', 'duration');
+    if (photoUrl == null) {
+      throw new BuiltValueNullFieldError('Friend', 'photoUrl');
+    }
+    if (timeTogether == null) {
+      throw new BuiltValueNullFieldError('Friend', 'timeTogether');
     }
   }
 
@@ -94,23 +95,23 @@ class _$Friend extends Friend {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is Friend &&
-        icon == other.icon &&
         name == other.name &&
-        duration == other.duration;
+        photoUrl == other.photoUrl &&
+        timeTogether == other.timeTogether;
   }
 
   @override
   int get hashCode {
-    return $jf(
-        $jc($jc($jc(0, icon.hashCode), name.hashCode), duration.hashCode));
+    return $jf($jc(
+        $jc($jc(0, name.hashCode), photoUrl.hashCode), timeTogether.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('Friend')
-          ..add('icon', icon)
           ..add('name', name)
-          ..add('duration', duration))
+          ..add('photoUrl', photoUrl)
+          ..add('timeTogether', timeTogether))
         .toString();
   }
 }
@@ -118,25 +119,25 @@ class _$Friend extends Friend {
 class FriendBuilder implements Builder<Friend, FriendBuilder> {
   _$Friend _$v;
 
-  String _icon;
-  String get icon => _$this._icon;
-  set icon(String icon) => _$this._icon = icon;
-
   String _name;
   String get name => _$this._name;
   set name(String name) => _$this._name = name;
 
-  String _duration;
-  String get duration => _$this._duration;
-  set duration(String duration) => _$this._duration = duration;
+  String _photoUrl;
+  String get photoUrl => _$this._photoUrl;
+  set photoUrl(String photoUrl) => _$this._photoUrl = photoUrl;
+
+  String _timeTogether;
+  String get timeTogether => _$this._timeTogether;
+  set timeTogether(String timeTogether) => _$this._timeTogether = timeTogether;
 
   FriendBuilder();
 
   FriendBuilder get _$this {
     if (_$v != null) {
-      _icon = _$v.icon;
       _name = _$v.name;
-      _duration = _$v.duration;
+      _photoUrl = _$v.photoUrl;
+      _timeTogether = _$v.timeTogether;
       _$v = null;
     }
     return this;
@@ -157,8 +158,9 @@ class FriendBuilder implements Builder<Friend, FriendBuilder> {
 
   @override
   _$Friend build() {
-    final _$result =
-        _$v ?? new _$Friend._(icon: icon, name: name, duration: duration);
+    final _$result = _$v ??
+        new _$Friend._(
+            name: name, photoUrl: photoUrl, timeTogether: timeTogether);
     replace(_$result);
     return _$result;
   }

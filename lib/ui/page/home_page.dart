@@ -8,12 +8,15 @@ import 'package:flutter_app/model/day_filter.dart';
 import 'package:flutter_app/model/firend.dart';
 import 'package:flutter_app/model/mood.dart';
 import 'package:flutter_app/model/state/home_state.dart';
+import 'package:flutter_app/service/api_service.dart';
+import 'package:flutter_app/service/preferences_service.dart';
 import 'package:flutter_app/texts.dart';
 import 'package:flutter_app/ui/berezka_colors.dart';
 import 'package:flutter_app/ui/berezka_icons.dart';
 import 'package:flutter_app/ui/widget/dash.dart';
 import 'package:flutter_app/utils/log.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import 'package:rxdart/rxdart.dart';
 
 const _tag = "main_page";
@@ -31,7 +34,10 @@ class _HomePageState extends State<HomePage> {
   @override
   void didChangeDependencies() {
     if (_homeBloc == null) {
-      _homeBloc = HomeBloc();
+      _homeBloc = HomeBloc(
+        Provider.of<ApiService>(context),
+        Provider.of<PreferencesService>(context),
+      );
       StreamSubscription subscription = _homeBloc.state.listen((state) {
         setState(() => _state = state);
       });
@@ -187,7 +193,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget _title() {
     return Text(
-      "Александра",
+      _state.name,
       textAlign: TextAlign.center,
       style: TextStyle(
         color: BerezkaColors.title,
@@ -200,7 +206,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget _subtitle() {
     return Text(
-      "Отряд 12-14 лет",
+      _state.squad,
       textAlign: TextAlign.center,
       style: TextStyle(
         color: BerezkaColors.title,
@@ -248,7 +254,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 SizedBox(width: 5.0),
                 Text(
-                  "активнее 67% отряда",
+                  "активнее ${_state.rating}% отряда",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 16.0,
@@ -273,7 +279,7 @@ class _HomePageState extends State<HomePage> {
       textBaseline: TextBaseline.alphabetic,
       children: <Widget>[
         Text(
-          5.78.toString(),
+          _state.km,
           textAlign: TextAlign.center,
           style: TextStyle(
             color: BerezkaColors.title,
@@ -301,18 +307,18 @@ class _HomePageState extends State<HomePage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
-        _stat(163, Texts.min, Texts.duration),
+        _stat(_state.actionDuration, Texts.min, Texts.duration),
         Container(
           color: BerezkaColors.title.withOpacity(0.12),
           width: 1.0,
           height: 52.0,
         ),
-        _stat(1456, Texts.kkal, Texts.calorie),
+        _stat(_state.energy, Texts.kkal, Texts.calorie),
       ],
     );
   }
 
-  Widget _stat(double value, String name, String description) {
+  Widget _stat(String value, String name, String description) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -323,7 +329,7 @@ class _HomePageState extends State<HomePage> {
           textBaseline: TextBaseline.alphabetic,
           children: <Widget>[
             Text(
-              value.toString(),
+              value,
               textAlign: TextAlign.left,
               style: TextStyle(
                 color: BerezkaColors.title,
@@ -594,7 +600,7 @@ class _HomePageState extends State<HomePage> {
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
             child: CachedNetworkImage(
-              imageUrl: friend.icon,
+              imageUrl: friend.photoUrl,
               alignment: Alignment.center,
               width: 44.0,
               height: 44.0,
@@ -625,7 +631,7 @@ class _HomePageState extends State<HomePage> {
               color: BerezkaColors.title.withOpacity(0.05),
             ),
             child: Text(
-              friend.duration,
+              friend.timeTogether,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: BerezkaColors.title,

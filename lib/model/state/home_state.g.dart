@@ -8,6 +8,18 @@ part of 'home_state.dart';
 
 class _$HomeState extends HomeState {
   @override
+  final String name;
+  @override
+  final String squad;
+  @override
+  final String km;
+  @override
+  final String actionDuration;
+  @override
+  final String energy;
+  @override
+  final String rating;
+  @override
   final DayFilter activeDayFilter;
   @override
   final BuiltSet<ActivityItem> activityItems;
@@ -20,8 +32,35 @@ class _$HomeState extends HomeState {
       (new HomeStateBuilder()..update(updates)).build();
 
   _$HomeState._(
-      {this.activeDayFilter, this.activityItems, this.moods, this.friends})
+      {this.name,
+      this.squad,
+      this.km,
+      this.actionDuration,
+      this.energy,
+      this.rating,
+      this.activeDayFilter,
+      this.activityItems,
+      this.moods,
+      this.friends})
       : super._() {
+    if (name == null) {
+      throw new BuiltValueNullFieldError('HomeState', 'name');
+    }
+    if (squad == null) {
+      throw new BuiltValueNullFieldError('HomeState', 'squad');
+    }
+    if (km == null) {
+      throw new BuiltValueNullFieldError('HomeState', 'km');
+    }
+    if (actionDuration == null) {
+      throw new BuiltValueNullFieldError('HomeState', 'actionDuration');
+    }
+    if (energy == null) {
+      throw new BuiltValueNullFieldError('HomeState', 'energy');
+    }
+    if (rating == null) {
+      throw new BuiltValueNullFieldError('HomeState', 'rating');
+    }
     if (activeDayFilter == null) {
       throw new BuiltValueNullFieldError('HomeState', 'activeDayFilter');
     }
@@ -47,6 +86,12 @@ class _$HomeState extends HomeState {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is HomeState &&
+        name == other.name &&
+        squad == other.squad &&
+        km == other.km &&
+        actionDuration == other.actionDuration &&
+        energy == other.energy &&
+        rating == other.rating &&
         activeDayFilter == other.activeDayFilter &&
         activityItems == other.activityItems &&
         moods == other.moods &&
@@ -56,7 +101,19 @@ class _$HomeState extends HomeState {
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, activeDayFilter.hashCode), activityItems.hashCode),
+        $jc(
+            $jc(
+                $jc(
+                    $jc(
+                        $jc(
+                            $jc(
+                                $jc($jc($jc(0, name.hashCode), squad.hashCode),
+                                    km.hashCode),
+                                actionDuration.hashCode),
+                            energy.hashCode),
+                        rating.hashCode),
+                    activeDayFilter.hashCode),
+                activityItems.hashCode),
             moods.hashCode),
         friends.hashCode));
   }
@@ -64,6 +121,12 @@ class _$HomeState extends HomeState {
   @override
   String toString() {
     return (newBuiltValueToStringHelper('HomeState')
+          ..add('name', name)
+          ..add('squad', squad)
+          ..add('km', km)
+          ..add('actionDuration', actionDuration)
+          ..add('energy', energy)
+          ..add('rating', rating)
           ..add('activeDayFilter', activeDayFilter)
           ..add('activityItems', activityItems)
           ..add('moods', moods)
@@ -74,6 +137,31 @@ class _$HomeState extends HomeState {
 
 class HomeStateBuilder implements Builder<HomeState, HomeStateBuilder> {
   _$HomeState _$v;
+
+  String _name;
+  String get name => _$this._name;
+  set name(String name) => _$this._name = name;
+
+  String _squad;
+  String get squad => _$this._squad;
+  set squad(String squad) => _$this._squad = squad;
+
+  String _km;
+  String get km => _$this._km;
+  set km(String km) => _$this._km = km;
+
+  String _actionDuration;
+  String get actionDuration => _$this._actionDuration;
+  set actionDuration(String actionDuration) =>
+      _$this._actionDuration = actionDuration;
+
+  String _energy;
+  String get energy => _$this._energy;
+  set energy(String energy) => _$this._energy = energy;
+
+  String _rating;
+  String get rating => _$this._rating;
+  set rating(String rating) => _$this._rating = rating;
 
   DayFilterBuilder _activeDayFilter;
   DayFilterBuilder get activeDayFilter =>
@@ -101,6 +189,12 @@ class HomeStateBuilder implements Builder<HomeState, HomeStateBuilder> {
 
   HomeStateBuilder get _$this {
     if (_$v != null) {
+      _name = _$v.name;
+      _squad = _$v.squad;
+      _km = _$v.km;
+      _actionDuration = _$v.actionDuration;
+      _energy = _$v.energy;
+      _rating = _$v.rating;
       _activeDayFilter = _$v.activeDayFilter?.toBuilder();
       _activityItems = _$v.activityItems?.toBuilder();
       _moods = _$v.moods?.toBuilder();
@@ -129,6 +223,12 @@ class HomeStateBuilder implements Builder<HomeState, HomeStateBuilder> {
     try {
       _$result = _$v ??
           new _$HomeState._(
+              name: name,
+              squad: squad,
+              km: km,
+              actionDuration: actionDuration,
+              energy: energy,
+              rating: rating,
               activeDayFilter: activeDayFilter.build(),
               activityItems: activityItems.build(),
               moods: moods.build(),

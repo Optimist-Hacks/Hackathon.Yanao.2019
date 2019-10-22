@@ -6,11 +6,11 @@ part 'firend.g.dart';
 abstract class Friend implements Built<Friend, FriendBuilder> {
   static Serializer<Friend> get serializer => _$friendSerializer;
 
-  String get icon;
-
   String get name;
 
-  String get duration;
+  String get photoUrl;
+
+  String get timeTogether;
 
   Friend._();
 
