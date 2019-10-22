@@ -5,13 +5,17 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/domain/camera_bloc.dart';
 import 'package:flutter_app/model/state/camera_state.dart';
+import 'package:flutter_app/service/api_service.dart';
+import 'package:flutter_app/service/preferences_service.dart';
 import 'package:flutter_app/texts.dart';
 import 'package:flutter_app/ui/berezka_colors.dart';
 import 'package:flutter_app/ui/berezka_icons.dart';
+import 'package:flutter_app/ui/page/main_page.dart';
 import 'package:flutter_app/utils/log.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:path/path.dart';
+import 'package:path/path.dart' as pathDart;
 import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:rxdart/rxdart.dart';
 
 const _tag = "camera_page";
@@ -31,9 +35,13 @@ class _CameraPageState extends State<CameraPage> {
   int cameraIndex = 0;
   CameraBloc _cameraBloc;
   CameraState _state;
+  ApiService _apiService;
+  PreferencesService _preferencesService;
 
   @override
   void didChangeDependencies() {
+    _apiService ??= Provider.of<ApiService>(context);
+    _preferencesService ??= Provider.of<PreferencesService>(context);
     if (_cameraBloc == null) {
       _cameraBloc = CameraBloc();
       StreamSubscription subscription = _cameraBloc.state.listen((state) {
@@ -62,7 +70,6 @@ class _CameraPageState extends State<CameraPage> {
     if (_state == null) {
       return Center(child: CircularProgressIndicator());
     }
-
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -210,14 +217,27 @@ class _CameraPageState extends State<CameraPage> {
       return;
     }
     _cameraBloc.setProcessing(true);
-    final path = join(
+    final path = pathDart.join(
       (await getApplicationDocumentsDirectory()).path,
       '${DateTime.now()}.png',
     );
     await _controller.takePicture(path);
-    Log.d(_tag, "File $path exists = ${await File(path).exists()}");
+    File file = File(path);
+    Log.d(_tag, "File $path exists = ${await file.exists()}");
+
+    final photoResult = await _apiService.addChildPhoto(
+      _preferencesService.getChild(),
+      file,
+    );
+    Log.d(_tag, "Finish upload photo with result $photoResult");
+
     _cameraBloc.increasePhoto();
     _cameraBloc.setProcessing(false);
+
+    Log.d(_tag, "photo count = ${_state.photoCount}");
+    if (_state.photoCount >= 4) {
+      Navigator.popAndPushNamed(context, MainPage.routeName);
+    }
   }
 
   initializeCamera() {
@@ -307,7 +327,6 @@ class _ChronometerState extends State<Chronometer> {
     } else {
       secondsStr = "$seconds";
     }
-    ;
 
     return "$minutesStr:$secondsStr";
   }

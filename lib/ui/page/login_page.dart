@@ -151,6 +151,7 @@ class _LoginPageState extends State<LoginPage> {
     } else {
       Log.d(_tag, "Login success $result");
       _preferencesService.setCurrentUser(result.token);
+      _preferencesService.setChild(result.childrenIds.elementAt(0));
       Navigator.popAndPushNamed(context, CameraPage.routeName);
     }
   }

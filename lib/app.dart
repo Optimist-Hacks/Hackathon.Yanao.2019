@@ -35,12 +35,10 @@ class App extends StatelessWidget {
             MainPage.routeName: (context) => MainPage(),
             CameraPage.routeName: (context) => CameraPage(),
           },
-          home:
-            CameraPage(),
-//          Texts.isEmpty(
-//                  Provider.of<PreferencesService>(context).getCurrentUser())
-//              ? LoginPage()
-//              : MainPage(),
+          home: Texts.isEmpty(
+                  Provider.of<PreferencesService>(context).getCurrentUser())
+              ? LoginPage()
+              : MainPage(),
         ),
       ),
     );

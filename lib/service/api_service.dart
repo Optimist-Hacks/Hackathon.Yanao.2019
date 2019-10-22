@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert' show json;
+import 'dart:io';
 
 import 'package:flutter_app/model/serializer/serializers.dart';
 import 'package:flutter_app/model/server/login_response.dart';
@@ -37,6 +38,25 @@ class ApiService {
       return null;
     }
     return deserialize<LoginResponse>(jsonResponse);
+  }
+
+  Future<bool> addChildPhoto(String childId, File photo) async {
+    final uri = _buildUri(
+        "/parent/${_preferencesService.getCurrentUser()}/$childId/addChildPhoto");
+    var request = http.MultipartRequest("POST", uri);
+    request.files.add(
+      http.MultipartFile.fromBytes(
+        'pic',
+        await photo.readAsBytes(),
+        filename: "pic",
+      ),
+    );
+
+    final response = await request.send();
+
+    Log.d(_tag, "<- POST url = $uri, code = ${response.statusCode}");
+
+    return response.statusCode == HttpCode.OK;
   }
 
   Future<dynamic> _get(String path, {Map<String, String> params}) async {
