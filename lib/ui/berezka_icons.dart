@@ -9,4 +9,5 @@ class BerezkaIcons {
   static const sad = "assets/sad.png";
   static const angry = "assets/angry.png";
   static const welcome = "assets/welcome.png";
+  static const shot = "assets/shot.svg";
 }

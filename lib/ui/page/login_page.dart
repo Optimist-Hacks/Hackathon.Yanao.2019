@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/domain/login_bloc.dart';
 import 'package:flutter_app/model/state/login_state.dart';
 import 'package:flutter_app/service/api_service.dart';
+import 'package:flutter_app/service/preferences_service.dart';
 import 'package:flutter_app/texts.dart';
 import 'package:flutter_app/ui/berezka_colors.dart';
 import 'package:flutter_app/ui/berezka_icons.dart';
+import 'package:flutter_app/ui/page/camera_page.dart';
 import 'package:flutter_app/utils/log.dart';
 import 'package:provider/provider.dart';
 import 'package:rxdart/rxdart.dart';
@@ -27,10 +29,12 @@ class _LoginPageState extends State<LoginPage> {
   LoginState _state;
   ApiService _apiService;
   TextEditingController _textController;
+  PreferencesService _preferencesService;
 
   @override
   void didChangeDependencies() {
     _apiService ??= Provider.of<ApiService>(context);
+    _preferencesService ??= Provider.of<PreferencesService>(context);
     if (_loginBloc == null) {
       _loginBloc = LoginBloc();
       StreamSubscription subscription = _loginBloc.state.listen((state) {
@@ -146,6 +150,8 @@ class _LoginPageState extends State<LoginPage> {
       Log.e(_tag, "Login failed");
     } else {
       Log.d(_tag, "Login success $result");
+      _preferencesService.setCurrentUser(result.token);
+      Navigator.popAndPushNamed(context, CameraPage.routeName);
     }
   }
 

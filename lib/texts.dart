@@ -22,4 +22,5 @@ class Texts {
   static const inviteDescription =
       "Введите код приглашения из лагеря, в который поедет ваш ребенок";
   static const enter = "Войти";
+  static const take5Photo = "Сделайте 5 фотографий лица ребенка";
 }

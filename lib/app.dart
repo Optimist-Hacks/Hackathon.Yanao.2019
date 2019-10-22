@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/service/api_service.dart';
 import 'package:flutter_app/service/preferences_service.dart';
+import 'package:flutter_app/ui/page/camera_page.dart';
 import 'package:flutter_app/ui/page/login_page.dart';
 import 'package:flutter_app/ui/page/main_page.dart';
 import 'package:flutter_app/texts.dart';
@@ -32,11 +33,14 @@ class App extends StatelessWidget {
           routes: {
             LoginPage.routeName: (context) => LoginPage(),
             MainPage.routeName: (context) => MainPage(),
+            CameraPage.routeName: (context) => CameraPage(),
           },
-          home: Texts.isEmpty(
-                  Provider.of<PreferencesService>(context).getCurrentUser())
-              ? LoginPage()
-              : MainPage(),
+          home:
+            CameraPage(),
+//          Texts.isEmpty(
+//                  Provider.of<PreferencesService>(context).getCurrentUser())
+//              ? LoginPage()
+//              : MainPage(),
         ),
       ),
     );
