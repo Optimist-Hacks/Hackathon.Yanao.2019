@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/service/api_service.dart';
 import 'package:flutter_app/service/preferences_service.dart';
 import 'package:flutter_app/ui/page/login_page.dart';
 import 'package:flutter_app/ui/page/main_page.dart';
@@ -9,9 +10,11 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final preferencesService = PreferencesService();
+    final apiService = ApiService(preferencesService);
     return MultiProvider(
       providers: [
         Provider.value(value: preferencesService),
+        Provider.value(value: apiService),
       ],
       child: Builder(
         builder: (context) => MaterialApp(

@@ -39,6 +39,7 @@ class _MainPageState extends State<MainPage> {
 
   @override
   void dispose() {
+    _subscriptions.dispose();
     super.dispose();
   }
 

@@ -21,4 +21,5 @@ class Texts {
   static const bestFriends = "Лучшие друзья";
   static const inviteDescription =
       "Введите код приглашения из лагеря, в который поедет ваш ребенок";
+  static const enter = "Войти";
 }
