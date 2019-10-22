@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/domain/main_bloc.dart';
 import 'package:flutter_app/model/day_filter.dart';
 import 'package:flutter_app/model/state/main_state.dart';
+import 'package:flutter_app/texts.dart';
 import 'package:flutter_app/ui/berezka_colors.dart';
 import 'package:flutter_app/utils/log.dart';
 import 'package:rxdart/rxdart.dart';
@@ -60,14 +61,16 @@ class _MainPageState extends State<MainPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            SizedBox(height: 130.0),
+            SizedBox(height: 70.0),
             _avatar(),
             SizedBox(height: 20.0),
             _title(),
             SizedBox(height: 5.0),
             _subtitle(),
-            SizedBox(height: 70.0),
+            SizedBox(height: 60.0),
             _dayFilters(),
+            SizedBox(height: 30.0),
+            _activityStats(),
           ],
         ),
       ),
@@ -151,7 +154,7 @@ class _MainPageState extends State<MainPage> {
 
   Widget _subtitle() {
     return Text(
-      "Александра",
+      "Отряд 12-14 лет",
       textAlign: TextAlign.center,
       style: TextStyle(
         color: BerezkaColors.title,
@@ -159,6 +162,154 @@ class _MainPageState extends State<MainPage> {
         height: 1.115,
         fontWeight: FontWeight.normal,
       ),
+    );
+  }
+
+  Widget _activityStats() {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 20.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20.0),
+        color: BerezkaColors.passive,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          SizedBox(height: 30.0),
+          _distance(),
+          SizedBox(height: 40.0),
+          _activity(),
+          SizedBox(height: 30.0),
+          Container(
+            height: 50.0,
+            margin: EdgeInsets.symmetric(horizontal: 20.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20.0),
+              color: BerezkaColors.white,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  Texts.today,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    height: 1.115,
+                    color: BerezkaColors.orange,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                SizedBox(width: 5.0),
+                Text(
+                  "активнее 67% отряда",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    height: 1.115,
+                    color: BerezkaColors.title,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 20.0),
+        ],
+      ),
+    );
+  }
+
+  Widget _distance() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.baseline,
+      textBaseline: TextBaseline.alphabetic,
+      children: <Widget>[
+        Text(
+          5.78.toString(),
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: BerezkaColors.title,
+            fontSize: 60.0,
+            height: 1.115,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        SizedBox(width: 5.0),
+        Text(
+          Texts.km,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: BerezkaColors.title.withOpacity(0.4),
+            fontSize: 23.0,
+            height: 1.115,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _activity() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        _stat(163, Texts.min, Texts.duration),
+        Container(
+          color: BerezkaColors.title.withOpacity(0.4),
+          width: 1.0,
+          height: 52.0,
+        ),
+        _stat(1456, Texts.kkal, Texts.calorie),
+      ],
+    );
+  }
+
+  Widget _stat(double value, String name, String description) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.baseline,
+          textBaseline: TextBaseline.alphabetic,
+          children: <Widget>[
+            Text(
+              value.toString(),
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                color: BerezkaColors.title,
+                fontSize: 24.0,
+                height: 1.115,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            SizedBox(width: 5.0),
+            Text(
+              name,
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                color: BerezkaColors.title.withOpacity(0.4),
+                fontSize: 15.0,
+                height: 1.115,
+                fontWeight: FontWeight.normal,
+              ),
+            ),
+          ],
+        ),
+        Text(
+          description,
+          textAlign: TextAlign.left,
+          style: TextStyle(
+            color: BerezkaColors.title.withOpacity(0.4),
+            fontSize: 15.0,
+            height: 1.115,
+            fontWeight: FontWeight.normal,
+          ),
+        ),
+      ],
     );
   }
 
