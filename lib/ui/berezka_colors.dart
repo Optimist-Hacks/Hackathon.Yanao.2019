@@ -13,4 +13,8 @@ class BerezkaColors {
   static const sad = Color(0xFF20B6FF);
   static const angry = Color(0xFFE84805);
   static const border = Color(0xFFFFC01D);
+  static const sleep = Color(0xFF64C7E4);
+  static const sport = orange;
+  static const chill = Color(0xFFECBBDA);
+  static const eat = Color(0xFF988ED3);
 }

@@ -23,4 +23,8 @@ class Texts {
       "Введите код приглашения из лагеря, в который поедет ваш ребенок";
   static const enter = "Войти";
   static const take5Photo = "Сделайте 5 фотографий лица ребенка";
+  static const sleep = "Спит в отрядном домике";
+  static const sport = "Занимается спортом";
+  static const chill = "Отдыхает в отрядном домике";
+  static const eat = "Обедает в главной столовой";
 }

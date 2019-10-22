@@ -6,7 +6,6 @@ import 'package:flutter_app/model/server/child_response.dart';
 import 'package:flutter_app/model/state/home_state.dart';
 import 'package:flutter_app/service/api_service.dart';
 import 'package:flutter_app/service/preferences_service.dart';
-import 'package:flutter_app/ui/berezka_icons.dart';
 import 'package:flutter_app/utils/log.dart';
 import 'package:intl/intl.dart';
 import 'package:rxdart/rxdart.dart';
@@ -32,12 +31,7 @@ class HomeBloc {
         ..energy = ""
         ..rating = ""
         ..activeDayFilter = DayFilter.day.toBuilder()
-        ..activityItems = BuiltSet<ActivityItem>([
-          ActivityItem((b) => b
-            ..icon = BerezkaIcons.basketball
-            ..name = "Сейчас играет в баскетбол"
-            ..duration = "30-45 минут")
-        ]).toBuilder()
+        ..activityItems = SetBuilder<ActivityItem>()
         ..moods = BuiltMap<Mood, double>({
           Mood.funny: 45.0,
           Mood.calm: 34.0,
@@ -93,6 +87,9 @@ class HomeBloc {
         countFormat.format(response.actionDuration / 60000.0).toString();
     final energy = countFormat.format(response.energy).toString();
     final rating = response.rating.toString();
+    final activityItems = response.actionTimetable
+        .map((action) => ActivityItem.fromValue(action))
+        .toSet();
 
     _updateState((b) => b
       ..name = response.name
@@ -100,7 +97,8 @@ class HomeBloc {
       ..km = km
       ..actionDuration = actionDuration
       ..energy = energy
-      ..rating = rating);
+      ..rating = rating
+      ..activityItems = SetBuilder<ActivityItem>(activityItems));
   }
 
   void onClickDayFilter(DayFilter dayFilter) {

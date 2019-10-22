@@ -19,6 +19,8 @@ class _$ActivityItemSerializer implements StructuredSerializer<ActivityItem> {
   Iterable<Object> serialize(Serializers serializers, ActivityItem object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
+      'value',
+      serializers.serialize(object.value, specifiedType: const FullType(int)),
       'icon',
       serializers.serialize(object.icon, specifiedType: const FullType(String)),
       'name',
@@ -26,6 +28,8 @@ class _$ActivityItemSerializer implements StructuredSerializer<ActivityItem> {
       'duration',
       serializers.serialize(object.duration,
           specifiedType: const FullType(String)),
+      'color',
+      serializers.serialize(object.color, specifiedType: const FullType(Color)),
     ];
 
     return result;
@@ -42,6 +46,10 @@ class _$ActivityItemSerializer implements StructuredSerializer<ActivityItem> {
       iterator.moveNext();
       final dynamic value = iterator.current;
       switch (key) {
+        case 'value':
+          result.value = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
         case 'icon':
           result.icon = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
@@ -54,6 +62,10 @@ class _$ActivityItemSerializer implements StructuredSerializer<ActivityItem> {
           result.duration = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'color':
+          result.color = serializers.deserialize(value,
+              specifiedType: const FullType(Color)) as Color;
+          break;
       }
     }
 
@@ -63,16 +75,25 @@ class _$ActivityItemSerializer implements StructuredSerializer<ActivityItem> {
 
 class _$ActivityItem extends ActivityItem {
   @override
+  final int value;
+  @override
   final String icon;
   @override
   final String name;
   @override
   final String duration;
+  @override
+  final Color color;
 
   factory _$ActivityItem([void Function(ActivityItemBuilder) updates]) =>
       (new ActivityItemBuilder()..update(updates)).build();
 
-  _$ActivityItem._({this.icon, this.name, this.duration}) : super._() {
+  _$ActivityItem._(
+      {this.value, this.icon, this.name, this.duration, this.color})
+      : super._() {
+    if (value == null) {
+      throw new BuiltValueNullFieldError('ActivityItem', 'value');
+    }
     if (icon == null) {
       throw new BuiltValueNullFieldError('ActivityItem', 'icon');
     }
@@ -81,6 +102,9 @@ class _$ActivityItem extends ActivityItem {
     }
     if (duration == null) {
       throw new BuiltValueNullFieldError('ActivityItem', 'duration');
+    }
+    if (color == null) {
+      throw new BuiltValueNullFieldError('ActivityItem', 'color');
     }
   }
 
@@ -95,23 +119,29 @@ class _$ActivityItem extends ActivityItem {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is ActivityItem &&
+        value == other.value &&
         icon == other.icon &&
         name == other.name &&
-        duration == other.duration;
+        duration == other.duration &&
+        color == other.color;
   }
 
   @override
   int get hashCode {
-    return $jf(
-        $jc($jc($jc(0, icon.hashCode), name.hashCode), duration.hashCode));
+    return $jf($jc(
+        $jc($jc($jc($jc(0, value.hashCode), icon.hashCode), name.hashCode),
+            duration.hashCode),
+        color.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('ActivityItem')
+          ..add('value', value)
           ..add('icon', icon)
           ..add('name', name)
-          ..add('duration', duration))
+          ..add('duration', duration)
+          ..add('color', color))
         .toString();
   }
 }
@@ -119,6 +149,10 @@ class _$ActivityItem extends ActivityItem {
 class ActivityItemBuilder
     implements Builder<ActivityItem, ActivityItemBuilder> {
   _$ActivityItem _$v;
+
+  int _value;
+  int get value => _$this._value;
+  set value(int value) => _$this._value = value;
 
   String _icon;
   String get icon => _$this._icon;
@@ -132,13 +166,19 @@ class ActivityItemBuilder
   String get duration => _$this._duration;
   set duration(String duration) => _$this._duration = duration;
 
+  Color _color;
+  Color get color => _$this._color;
+  set color(Color color) => _$this._color = color;
+
   ActivityItemBuilder();
 
   ActivityItemBuilder get _$this {
     if (_$v != null) {
+      _value = _$v.value;
       _icon = _$v.icon;
       _name = _$v.name;
       _duration = _$v.duration;
+      _color = _$v.color;
       _$v = null;
     }
     return this;
@@ -159,8 +199,13 @@ class ActivityItemBuilder
 
   @override
   _$ActivityItem build() {
-    final _$result =
-        _$v ?? new _$ActivityItem._(icon: icon, name: name, duration: duration);
+    final _$result = _$v ??
+        new _$ActivityItem._(
+            value: value,
+            icon: icon,
+            name: name,
+            duration: duration,
+            color: color);
     replace(_$result);
     return _$result;
   }

@@ -209,51 +209,35 @@ class EmotionsBuilder implements Builder<Emotions, EmotionsBuilder> {
   _$Emotions _$v;
 
   double _anger;
-
   double get anger => _$this._anger;
-
   set anger(double anger) => _$this._anger = anger;
 
   double _contempt;
-
   double get contempt => _$this._contempt;
-
   set contempt(double contempt) => _$this._contempt = contempt;
 
   double _disgust;
-
   double get disgust => _$this._disgust;
-
   set disgust(double disgust) => _$this._disgust = disgust;
 
   double _fear;
-
   double get fear => _$this._fear;
-
   set fear(double fear) => _$this._fear = fear;
 
   double _happiness;
-
   double get happiness => _$this._happiness;
-
   set happiness(double happiness) => _$this._happiness = happiness;
 
   double _neutral;
-
   double get neutral => _$this._neutral;
-
   set neutral(double neutral) => _$this._neutral = neutral;
 
   double _sadness;
-
   double get sadness => _$this._sadness;
-
   set sadness(double sadness) => _$this._sadness = sadness;
 
   double _surprise;
-
   double get surprise => _$this._surprise;
-
   set surprise(double surprise) => _$this._surprise = surprise;
 
   EmotionsBuilder();

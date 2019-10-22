@@ -28,8 +28,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final CompositeSubscription _subscriptions = CompositeSubscription();
+  final ScrollController _scheduleController = ScrollController();
   HomeBloc _homeBloc;
   HomeState _state;
+  bool scrolled = false;
 
   @override
   void didChangeDependencies() {
@@ -48,6 +50,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void dispose() {
+    _subscriptions.dispose();
+    _scheduleController.dispose();
     super.dispose();
   }
 
@@ -55,6 +59,14 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     if (_state == null) {
       return Center(child: CircularProgressIndicator());
+    }
+
+    if (!scrolled && _state.activityItems.isNotEmpty) {
+      Timer(
+          Duration(milliseconds: 1000),
+          () => _scheduleController
+              .jumpTo(_scheduleController.position.maxScrollExtent));
+      scrolled = true;
     }
 
     return SingleChildScrollView(
@@ -369,7 +381,9 @@ class _HomePageState extends State<HomePage> {
     return SizedBox(
       height: 94,
       width: double.maxFinite,
-      child: ListView.builder(
+      child: ListView.separated(
+        separatorBuilder: (context, index) => SizedBox(width: 10.0),
+        controller: _scheduleController,
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         scrollDirection: Axis.horizontal,
         itemBuilder: (BuildContext context, index) =>
@@ -381,11 +395,11 @@ class _HomePageState extends State<HomePage> {
 
   Widget _activityItem(ActivityItem activityItem) {
     return Container(
-      width: 370,
+      width: 360,
       height: 92,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20.0),
-        color: BerezkaColors.orange,
+        color: activityItem.color,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
