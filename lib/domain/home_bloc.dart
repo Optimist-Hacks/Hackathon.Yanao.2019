@@ -24,6 +24,7 @@ class HomeBloc {
   HomeBloc(this._apiService, this._preferencesService) {
     initState = HomeState(
       (b) => b
+        ..photoUrl = ""
         ..name = ""
         ..squad = ""
         ..km = ""
@@ -64,6 +65,7 @@ class HomeBloc {
     }).toBuilder();
 
     _updateState((b) => b
+      ..photoUrl = response.photoUrl
       ..name = response.name
       ..squad = response.squad
       ..km = km

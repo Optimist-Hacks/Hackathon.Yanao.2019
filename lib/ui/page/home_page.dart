@@ -171,7 +171,7 @@ class _HomePageState extends State<HomePage> {
     return ClipRRect(
       borderRadius: BorderRadius.circular(36),
       child: CachedNetworkImage(
-        imageUrl: "https://www.dropbox.com/s/e41zuwyrnnzxatp/preview.png?raw=1",
+        imageUrl: _state.photoUrl,
         alignment: Alignment.center,
         width: 86.0,
         height: 86.0,

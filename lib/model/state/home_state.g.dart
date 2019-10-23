@@ -8,6 +8,8 @@ part of 'home_state.dart';
 
 class _$HomeState extends HomeState {
   @override
+  final String photoUrl;
+  @override
   final String name;
   @override
   final String squad;
@@ -32,7 +34,8 @@ class _$HomeState extends HomeState {
       (new HomeStateBuilder()..update(updates)).build();
 
   _$HomeState._(
-      {this.name,
+      {this.photoUrl,
+      this.name,
       this.squad,
       this.km,
       this.actionDuration,
@@ -43,6 +46,9 @@ class _$HomeState extends HomeState {
       this.moods,
       this.friends})
       : super._() {
+    if (photoUrl == null) {
+      throw new BuiltValueNullFieldError('HomeState', 'photoUrl');
+    }
     if (name == null) {
       throw new BuiltValueNullFieldError('HomeState', 'name');
     }
@@ -86,6 +92,7 @@ class _$HomeState extends HomeState {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is HomeState &&
+        photoUrl == other.photoUrl &&
         name == other.name &&
         squad == other.squad &&
         km == other.km &&
@@ -107,7 +114,11 @@ class _$HomeState extends HomeState {
                     $jc(
                         $jc(
                             $jc(
-                                $jc($jc($jc(0, name.hashCode), squad.hashCode),
+                                $jc(
+                                    $jc(
+                                        $jc($jc(0, photoUrl.hashCode),
+                                            name.hashCode),
+                                        squad.hashCode),
                                     km.hashCode),
                                 actionDuration.hashCode),
                             energy.hashCode),
@@ -121,6 +132,7 @@ class _$HomeState extends HomeState {
   @override
   String toString() {
     return (newBuiltValueToStringHelper('HomeState')
+          ..add('photoUrl', photoUrl)
           ..add('name', name)
           ..add('squad', squad)
           ..add('km', km)
@@ -137,6 +149,10 @@ class _$HomeState extends HomeState {
 
 class HomeStateBuilder implements Builder<HomeState, HomeStateBuilder> {
   _$HomeState _$v;
+
+  String _photoUrl;
+  String get photoUrl => _$this._photoUrl;
+  set photoUrl(String photoUrl) => _$this._photoUrl = photoUrl;
 
   String _name;
   String get name => _$this._name;
@@ -189,6 +205,7 @@ class HomeStateBuilder implements Builder<HomeState, HomeStateBuilder> {
 
   HomeStateBuilder get _$this {
     if (_$v != null) {
+      _photoUrl = _$v.photoUrl;
       _name = _$v.name;
       _squad = _$v.squad;
       _km = _$v.km;
@@ -223,6 +240,7 @@ class HomeStateBuilder implements Builder<HomeState, HomeStateBuilder> {
     try {
       _$result = _$v ??
           new _$HomeState._(
+              photoUrl: photoUrl,
               name: name,
               squad: squad,
               km: km,
