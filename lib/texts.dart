@@ -3,7 +3,7 @@ class Texts {
     return text == null || text.isEmpty;
   }
 
-  static const appName = "Berezks";
+  static const appName = "Всё хорошо";
   static const day = "День";
   static const week = "Неделя";
   static const period = "Смена";
@@ -36,5 +36,4 @@ class Texts {
       "Программа лагеря построена так, что создаются реальные возможности для того, чтобы дети получили что-то важное для их развития";
   static const buy = "Купить";
   static const exit = "Выйти";
-
 }

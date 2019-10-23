@@ -32,6 +32,7 @@ class _HomePageState extends State<HomePage> {
   HomeBloc _homeBloc;
   HomeState _state;
   bool scrolled = false;
+  Timer _timer;
 
   @override
   void didChangeDependencies() {
@@ -52,6 +53,8 @@ class _HomePageState extends State<HomePage> {
   void dispose() {
     _subscriptions.dispose();
     _scheduleController.dispose();
+    _homeBloc?.dispose();
+    _timer?.cancel();
     super.dispose();
   }
 
@@ -63,7 +66,7 @@ class _HomePageState extends State<HomePage> {
 
     if (!scrolled && _state.activityItems.isNotEmpty) {
       Timer(
-          Duration(milliseconds: 1000),
+          Duration(milliseconds: 500),
           () => _scheduleController
               .jumpTo(_scheduleController.position.maxScrollExtent));
       scrolled = true;

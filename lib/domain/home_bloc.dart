@@ -1,7 +1,11 @@
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:flutter_app/model/activity_item.dart';
 import 'package:flutter_app/model/day_filter.dart';
 import 'package:flutter_app/model/firend.dart';
 import 'package:flutter_app/model/mood.dart';
+import 'package:flutter_app/model/serializer/serializers.dart';
 import 'package:flutter_app/model/server/child_response.dart';
 import 'package:flutter_app/model/state/home_state.dart';
 import 'package:flutter_app/service/api_service.dart';
@@ -17,12 +21,12 @@ class HomeBloc {
   final _stateSubject = BehaviorSubject<HomeState>();
   final ApiService _apiService;
   final PreferencesService _preferencesService;
-  HomeState initState;
+  Timer _timer;
 
   Stream<HomeState> get state => _stateSubject;
 
   HomeBloc(this._apiService, this._preferencesService) {
-    initState = HomeState(
+    final initState = HomeState(
       (b) => b
         ..photoUrl = ""
         ..name = ""
@@ -37,6 +41,21 @@ class HomeBloc {
         ..friends = BuiltSet<Friend>().toBuilder(),
     );
     _stateSubject.add(initState);
+    final response = _preferencesService.getData();
+    if (response != null) {
+      _onResponse(deserialize<ChildResponse>(json.decode(response)));
+    }
+    _updateFromServer();
+    _timer =
+        Timer.periodic(Duration(seconds: 10), (Timer t) => _updateFromServer());
+  }
+
+  void dispose() {
+    _timer?.cancel();
+  }
+
+  Future<void> _updateFromServer() async {
+    Log.d(_tag, "Update from server");
     _apiService.childStats(_preferencesService.getChild()).then(_onResponse);
   }
 
@@ -78,6 +97,8 @@ class HomeBloc {
       ..activityItems = SetBuilder<ActivityItem>(activityItems)
       ..moods = moods
       ..friends = response.bestFriends.toBuilder());
+
+    _preferencesService.setData(jsonEncode(serialize<ChildResponse>(response)));
   }
 
   void onClickDayFilter(DayFilter dayFilter) {

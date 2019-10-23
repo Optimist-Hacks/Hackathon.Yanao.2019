@@ -1,7 +1,6 @@
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_app/texts.dart';
 import 'package:flutter_app/ui/berezka_icons.dart';
 
 part 'navigation_item.g.dart';
@@ -11,14 +10,14 @@ abstract class NavigationItem
   static Serializer<NavigationItem> get serializer =>
       _$navigationItemSerializer;
 
-  static final home = NavigationItem._create(
+  static final schedule = NavigationItem._create(
     value: 0,
-    icon: BerezkaIcons.home,
+    icon: BerezkaIcons.schedule,
   );
 
-  static final schedule = NavigationItem._create(
+  static final home = NavigationItem._create(
     value: 1,
-    icon: BerezkaIcons.schedule,
+    icon: BerezkaIcons.home,
   );
 
   static final info = NavigationItem._create(
@@ -33,8 +32,8 @@ abstract class NavigationItem
   NavigationItem._();
 
   static final values = [
-    home,
     schedule,
+    home,
     info,
   ];
 

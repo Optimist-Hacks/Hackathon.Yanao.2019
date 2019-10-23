@@ -59,11 +59,11 @@ class _MainPageState extends State<MainPage> {
         backgroundColor: BerezkaColors.white,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: _navigationIcon(NavigationItem.home),
+            icon: _navigationIcon(NavigationItem.schedule),
             title: Container(),
           ),
           BottomNavigationBarItem(
-            icon: _navigationIcon(NavigationItem.schedule),
+            icon: _navigationIcon(NavigationItem.home),
             title: Container(),
           ),
           BottomNavigationBarItem(
