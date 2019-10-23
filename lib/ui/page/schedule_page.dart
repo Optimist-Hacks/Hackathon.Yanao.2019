@@ -203,7 +203,7 @@ class _SchedulePageState extends State<SchedulePage> {
             style: TextStyle(
               fontSize: 16.0,
               height: 1.115,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w600,
               color: _state.activeDayFilter == dayFilter
                   ? BerezkaColors.white
                   : BerezkaColors.title,

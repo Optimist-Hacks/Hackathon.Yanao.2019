@@ -130,7 +130,7 @@ class _CameraPageState extends State<CameraPage> {
               style: TextStyle(
                 color: BerezkaColors.white,
                 fontSize: 45.0,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w600,
                 height: 1.115,
               ),
             ),
@@ -140,7 +140,7 @@ class _CameraPageState extends State<CameraPage> {
               style: TextStyle(
                 color: BerezkaColors.white.withOpacity(0.5),
                 fontSize: 16.0,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w600,
                 height: 1.115,
               ),
             ),
@@ -191,7 +191,7 @@ class _CameraPageState extends State<CameraPage> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 15,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w600,
                 height: 1.115,
                 color: BerezkaColors.white,
               ),

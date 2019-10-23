@@ -66,9 +66,13 @@ class _HomePageState extends State<HomePage> {
 
     if (!scrolled && _state.activityItems.isNotEmpty) {
       Timer(
-          Duration(milliseconds: 500),
-          () => _scheduleController
-              .jumpTo(_scheduleController.position.maxScrollExtent));
+        Duration(milliseconds: 500),
+        () => _scheduleController.animateTo(
+          _scheduleController.position.maxScrollExtent,
+          curve: Curves.easeInOutQuad,
+          duration: Duration(milliseconds: 300),
+        ),
+      );
       scrolled = true;
     }
 
@@ -78,7 +82,7 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            SizedBox(height: 70.0),
+            SizedBox(height: 74.0),
             Stack(
               children: <Widget>[
                 Center(child: _avatar()),
@@ -89,7 +93,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            SizedBox(height: 20.0),
+            SizedBox(height: 21.0),
             _title(),
             SizedBox(height: 5.0),
             _subtitle(),
@@ -159,7 +163,7 @@ class _HomePageState extends State<HomePage> {
             style: TextStyle(
               fontSize: 16.0,
               height: 1.115,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w600,
               color: _state.activeDayFilter == dayFilter
                   ? BerezkaColors.white
                   : BerezkaColors.title,
@@ -264,7 +268,7 @@ class _HomePageState extends State<HomePage> {
                     fontSize: 16.0,
                     height: 1.115,
                     color: BerezkaColors.orange,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
                 SizedBox(width: 5.0),
@@ -275,7 +279,7 @@ class _HomePageState extends State<HomePage> {
                     fontSize: 16.0,
                     height: 1.115,
                     color: BerezkaColors.title,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ],
@@ -311,7 +315,7 @@ class _HomePageState extends State<HomePage> {
             color: BerezkaColors.title.withOpacity(0.4),
             fontSize: 23.0,
             height: 1.115,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w600,
           ),
         ),
       ],
@@ -350,7 +354,7 @@ class _HomePageState extends State<HomePage> {
                 color: BerezkaColors.title,
                 fontSize: 24.0,
                 height: 1.115,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w600,
               ),
             ),
             SizedBox(width: 5.0),
@@ -429,7 +433,7 @@ class _HomePageState extends State<HomePage> {
                 maxLines: 2,
                 style: TextStyle(
                   color: BerezkaColors.white,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w600,
                   fontSize: 17,
                   height: 1.17,
                 ),
@@ -444,7 +448,7 @@ class _HomePageState extends State<HomePage> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: BerezkaColors.white,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w600,
                       fontSize: 12,
                       height: 1.12,
                     ),
@@ -542,7 +546,7 @@ class _HomePageState extends State<HomePage> {
               color: BerezkaColors.title,
               fontSize: 16,
               height: 1.115,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w600,
             ),
           ),
           Expanded(
@@ -563,7 +567,7 @@ class _HomePageState extends State<HomePage> {
                 color: BerezkaColors.title,
                 fontSize: 16,
                 height: 1.115,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w600,
               ),
             ),
           ),
@@ -643,7 +647,7 @@ class _HomePageState extends State<HomePage> {
               color: BerezkaColors.title,
               fontSize: 16,
               height: 1.115,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w600,
             ),
           ),
           Expanded(
@@ -664,7 +668,7 @@ class _HomePageState extends State<HomePage> {
                 color: BerezkaColors.title,
                 fontSize: 16,
                 height: 1.115,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w600,
               ),
             ),
           ),

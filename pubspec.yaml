@@ -1,6 +1,6 @@
 name: flutter_app
 description: Berezka
-version: 1.0.0+1
+version: 1.0.0
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -33,6 +33,6 @@ flutter:
       fonts:
         - asset: fonts/Averta Cyrillic Regular.otf
         - asset: fonts/Averta Cyrillic SemiBold.otf
-          weight: 500
+          weight: 600
         - asset: fonts/Averta Cyrillic Bold.otf
           weight: 700

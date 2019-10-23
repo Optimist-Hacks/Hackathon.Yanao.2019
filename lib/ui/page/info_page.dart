@@ -103,7 +103,7 @@ class _InfoPageState extends State<InfoPage> {
                         "04 июня – 20 июня",
                         textAlign: TextAlign.start,
                         style: TextStyle(
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w600,
                           fontSize: 18.0,
                           height: 1.17,
                           color: BerezkaColors.white,
@@ -127,7 +127,7 @@ class _InfoPageState extends State<InfoPage> {
                         "Степан Кладиков",
                         textAlign: TextAlign.start,
                         style: TextStyle(
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w600,
                           fontSize: 18.0,
                           height: 1.17,
                           color: BerezkaColors.white,
@@ -186,7 +186,7 @@ class _InfoPageState extends State<InfoPage> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16.0,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w600,
                       height: 1.111,
                       color: BerezkaColors.active,
                     ),
@@ -231,7 +231,7 @@ class _InfoPageState extends State<InfoPage> {
                 row2,
                 textAlign: TextAlign.start,
                 style: TextStyle(
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w600,
                   fontSize: 18.0,
                   height: 1.17,
                   color: BerezkaColors.title.withOpacity(0.6),
@@ -257,7 +257,7 @@ class _InfoPageState extends State<InfoPage> {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 16.0,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w600,
                     height: 1.115,
                     color: BerezkaColors.passive,
                   ),
