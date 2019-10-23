@@ -24,10 +24,10 @@ class Texts {
       "Введите код приглашения из лагеря, в который поедет ваш ребенок";
   static const enter = "Войти";
   static const take5Photo = "Сделайте 5 фотографий лица ребенка";
-  static const walk = "Прогуливается возле озера";
-  static const sport = "Занимается спортом";
-  static const chill = "Отдыхает в отрядном домике";
-  static const eat = "Обедает в главной столовой";
+  static const walk = "Прогуливается возле\nозера";
+  static const sport = "Сейчас занимается\nспортом";
+  static const chill = "Отдыхает в отрядном\nдомике";
+  static const eat = "Обедает в главной\nстоловой";
   static const hour = "ч";
   static const camp = "Расписание\n'I&Camp'";
   static const morning = "Утро";
