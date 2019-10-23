@@ -180,14 +180,17 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _avatar() {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(36),
-      child: CachedNetworkImage(
-        imageUrl: _state.photoUrl,
-        alignment: Alignment.center,
-        width: 86.0,
-        height: 86.0,
-        fit: BoxFit.cover,
+    return SizedBox(
+      width: 86.0,
+      height: 86.0,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(36),
+        child: CachedNetworkImage(
+          imageUrl: _state.photoUrl,
+          alignment: Alignment.center,
+          height: 86.0,
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }
@@ -582,9 +585,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _friends() {
-    if (_state.friends.isEmpty) {
-      return Container();
-    }
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 20.0),
       decoration: BoxDecoration(
@@ -633,14 +633,17 @@ class _HomePageState extends State<HomePage> {
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: CachedNetworkImage(
-              imageUrl: friend.photoUrl,
-              alignment: Alignment.center,
-              width: 44.0,
-              height: 44.0,
-              fit: BoxFit.cover,
+          SizedBox(
+            width: 44.0,
+            height: 44.0,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: CachedNetworkImage(
+                imageUrl: friend.photoUrl,
+                alignment: Alignment.center,
+                height: 44.0,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           SizedBox(width: 25.0),
@@ -683,9 +686,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _photos() {
-    if (_state.lastPhotos.isEmpty) {
-      return Container();
-    }
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 20.0),
       decoration: BoxDecoration(
@@ -730,22 +730,25 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _photoItem(String url) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(13),
-      child: RaisedButton(
-        padding: EdgeInsets.zero,
-        elevation: 0.0,
-        onPressed: () => _onClickPhoto(url),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(18.0),
-        ),
-        color: BerezkaColors.chill,
-        child: CachedNetworkImage(
-          imageUrl: url,
-          alignment: Alignment.center,
-          width: 84.0,
-          height: 84.0,
-          fit: BoxFit.cover,
+    return SizedBox(
+      width: 84.0,
+      height: 84.0,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(13),
+        child: RaisedButton(
+          padding: EdgeInsets.zero,
+          elevation: 0.0,
+          onPressed: () => _onClickPhoto(url),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18.0),
+          ),
+          color: BerezkaColors.chill,
+          child: CachedNetworkImage(
+            height: 84.0,
+            imageUrl: url,
+            alignment: Alignment.center,
+            fit: BoxFit.cover,
+          ),
         ),
       ),
     );

@@ -14,4 +14,5 @@ class BerezkaIcons {
   static const eat = "assets/eat.gif";
   static const walk = "assets/walk.gif";
   static const logo = "assets/logo.png";
+  static const exit = "assets/exit.svg";
 }
