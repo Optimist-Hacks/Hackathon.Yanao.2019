@@ -29,6 +29,8 @@ class _$HomeState extends HomeState {
   final BuiltMap<Mood, int> moods;
   @override
   final BuiltSet<Friend> friends;
+  @override
+  final BuiltSet<String> lastPhotos;
 
   factory _$HomeState([void Function(HomeStateBuilder) updates]) =>
       (new HomeStateBuilder()..update(updates)).build();
@@ -44,7 +46,8 @@ class _$HomeState extends HomeState {
       this.activeDayFilter,
       this.activityItems,
       this.moods,
-      this.friends})
+      this.friends,
+      this.lastPhotos})
       : super._() {
     if (photoUrl == null) {
       throw new BuiltValueNullFieldError('HomeState', 'photoUrl');
@@ -79,6 +82,9 @@ class _$HomeState extends HomeState {
     if (friends == null) {
       throw new BuiltValueNullFieldError('HomeState', 'friends');
     }
+    if (lastPhotos == null) {
+      throw new BuiltValueNullFieldError('HomeState', 'lastPhotos');
+    }
   }
 
   @override
@@ -102,7 +108,8 @@ class _$HomeState extends HomeState {
         activeDayFilter == other.activeDayFilter &&
         activityItems == other.activityItems &&
         moods == other.moods &&
-        friends == other.friends;
+        friends == other.friends &&
+        lastPhotos == other.lastPhotos;
   }
 
   @override
@@ -116,17 +123,19 @@ class _$HomeState extends HomeState {
                             $jc(
                                 $jc(
                                     $jc(
-                                        $jc($jc(0, photoUrl.hashCode),
-                                            name.hashCode),
-                                        squad.hashCode),
-                                    km.hashCode),
-                                actionDuration.hashCode),
-                            energy.hashCode),
-                        rating.hashCode),
-                    activeDayFilter.hashCode),
-                activityItems.hashCode),
-            moods.hashCode),
-        friends.hashCode));
+                                        $jc(
+                                            $jc($jc(0, photoUrl.hashCode),
+                                                name.hashCode),
+                                            squad.hashCode),
+                                        km.hashCode),
+                                    actionDuration.hashCode),
+                                energy.hashCode),
+                            rating.hashCode),
+                        activeDayFilter.hashCode),
+                    activityItems.hashCode),
+                moods.hashCode),
+            friends.hashCode),
+        lastPhotos.hashCode));
   }
 
   @override
@@ -142,7 +151,8 @@ class _$HomeState extends HomeState {
           ..add('activeDayFilter', activeDayFilter)
           ..add('activityItems', activityItems)
           ..add('moods', moods)
-          ..add('friends', friends))
+          ..add('friends', friends)
+          ..add('lastPhotos', lastPhotos))
         .toString();
   }
 }
@@ -201,6 +211,12 @@ class HomeStateBuilder implements Builder<HomeState, HomeStateBuilder> {
       _$this._friends ??= new SetBuilder<Friend>();
   set friends(SetBuilder<Friend> friends) => _$this._friends = friends;
 
+  SetBuilder<String> _lastPhotos;
+  SetBuilder<String> get lastPhotos =>
+      _$this._lastPhotos ??= new SetBuilder<String>();
+  set lastPhotos(SetBuilder<String> lastPhotos) =>
+      _$this._lastPhotos = lastPhotos;
+
   HomeStateBuilder();
 
   HomeStateBuilder get _$this {
@@ -216,6 +232,7 @@ class HomeStateBuilder implements Builder<HomeState, HomeStateBuilder> {
       _activityItems = _$v.activityItems?.toBuilder();
       _moods = _$v.moods?.toBuilder();
       _friends = _$v.friends?.toBuilder();
+      _lastPhotos = _$v.lastPhotos?.toBuilder();
       _$v = null;
     }
     return this;
@@ -250,7 +267,8 @@ class HomeStateBuilder implements Builder<HomeState, HomeStateBuilder> {
               activeDayFilter: activeDayFilter.build(),
               activityItems: activityItems.build(),
               moods: moods.build(),
-              friends: friends.build());
+              friends: friends.build(),
+              lastPhotos: lastPhotos.build());
     } catch (_) {
       String _$failedField;
       try {
@@ -262,6 +280,8 @@ class HomeStateBuilder implements Builder<HomeState, HomeStateBuilder> {
         moods.build();
         _$failedField = 'friends';
         friends.build();
+        _$failedField = 'lastPhotos';
+        lastPhotos.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'HomeState', _$failedField, e.toString());

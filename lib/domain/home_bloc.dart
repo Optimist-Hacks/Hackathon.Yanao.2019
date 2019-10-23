@@ -38,7 +38,8 @@ class HomeBloc {
         ..activeDayFilter = DayFilter.day.toBuilder()
         ..activityItems = SetBuilder<ActivityItem>()
         ..moods = MapBuilder<Mood, int>()
-        ..friends = BuiltSet<Friend>().toBuilder(),
+        ..friends = BuiltSet<Friend>().toBuilder()
+        ..lastPhotos = BuiltSet<String>().toBuilder(),
     );
     _stateSubject.add(initState);
     final response = _preferencesService.getData();
@@ -96,7 +97,10 @@ class HomeBloc {
       ..rating = rating
       ..activityItems = SetBuilder<ActivityItem>(activityItems)
       ..moods = moods
-      ..friends = response.bestFriends.toBuilder());
+      ..friends = response.bestFriends.toBuilder()
+      ..lastPhotos = response.lastPhotos == null
+          ? BuiltSet<String>().toBuilder()
+          : response.lastPhotos.toBuilder());
 
     _preferencesService.setData(jsonEncode(serialize<ChildResponse>(response)));
   }

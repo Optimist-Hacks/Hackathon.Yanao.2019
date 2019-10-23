@@ -13,6 +13,7 @@ import 'package:flutter_app/service/preferences_service.dart';
 import 'package:flutter_app/texts.dart';
 import 'package:flutter_app/ui/berezka_colors.dart';
 import 'package:flutter_app/ui/berezka_icons.dart';
+import 'package:flutter_app/ui/page/image_page.dart';
 import 'package:flutter_app/ui/widget/dash.dart';
 import 'package:flutter_app/utils/log.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -111,6 +112,10 @@ class _HomePageState extends State<HomePage> {
             _dash(),
             SizedBox(height: 30.0),
             _friends(),
+            SizedBox(height: 30.0),
+            _dash(),
+            SizedBox(height: 30.0),
+            _photos(),
             SizedBox(height: 30.0),
           ],
         ),
@@ -677,6 +682,75 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  Widget _photos() {
+    if (_state.lastPhotos.isEmpty) {
+      return Container();
+    }
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 20.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20.0),
+        color: BerezkaColors.passive,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          SizedBox(height: 25.0),
+          Padding(
+            padding: EdgeInsets.only(left: 24.0),
+            child: Text(
+              Texts.lastPhotos,
+              textAlign: TextAlign.start,
+              style: TextStyle(
+                color: BerezkaColors.title,
+                fontSize: 24.0,
+                height: 1.114,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          SizedBox(height: 20.0),
+          SizedBox(
+            width: double.maxFinite,
+            height: 84.0,
+            child: ListView.separated(
+              separatorBuilder: (context, index) => SizedBox(width: 10.0),
+              physics: NeverScrollableScrollPhysics(),
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (BuildContext context, index) =>
+                  _photoItem(_state.lastPhotos.elementAt(index)),
+              itemCount: _state.lastPhotos.length,
+            ),
+          ),
+          SizedBox(height: 20.0),
+        ],
+      ),
+    );
+  }
+
+  Widget _photoItem(String url) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(13),
+      child: RaisedButton(
+        padding: EdgeInsets.zero,
+        elevation: 0.0,
+        onPressed: () => _onClickPhoto(url),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(18.0),
+        ),
+        color: BerezkaColors.chill,
+        child: CachedNetworkImage(
+          imageUrl: url,
+          alignment: Alignment.center,
+          width: 84.0,
+          height: 84.0,
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+
   void _onClickDayFilter(DayFilter dayFilter) {
     Log.d(_tag, "Click day filter $dayFilter");
     _homeBloc.onClickDayFilter(dayFilter);
@@ -684,5 +758,10 @@ class _HomePageState extends State<HomePage> {
 
   void _onClickPhone() {
     Log.d(_tag, "Click phone");
+  }
+
+  void _onClickPhoto(String url) {
+    Log.d(_tag, "Click photo $url");
+    Navigator.pushNamed(context, ImagePage.routeName, arguments: url);
   }
 }

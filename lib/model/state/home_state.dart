@@ -30,6 +30,8 @@ abstract class HomeState implements Built<HomeState, HomeStateBuilder> {
 
   BuiltSet<Friend> get friends;
 
+  BuiltSet<String> get lastPhotos;
+
   HomeState._();
 
   factory HomeState([void Function(HomeStateBuilder) updates]) = _$HomeState;

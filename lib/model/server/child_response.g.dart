@@ -48,7 +48,13 @@ class _$ChildResponseSerializer implements StructuredSerializer<ChildResponse> {
       serializers.serialize(object.squad,
           specifiedType: const FullType(String)),
     ];
-
+    if (object.lastPhotos != null) {
+      result
+        ..add('lastPhotos')
+        ..add(serializers.serialize(object.lastPhotos,
+            specifiedType:
+                const FullType(BuiltSet, const [const FullType(String)])));
+    }
     return result;
   }
 
@@ -108,6 +114,12 @@ class _$ChildResponseSerializer implements StructuredSerializer<ChildResponse> {
           result.squad = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'lastPhotos':
+          result.lastPhotos.replace(serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(BuiltSet, const [const FullType(String)]))
+              as BuiltSet<dynamic>);
+          break;
       }
     }
 
@@ -136,6 +148,8 @@ class _$ChildResponse extends ChildResponse {
   final int rating;
   @override
   final String squad;
+  @override
+  final BuiltSet<String> lastPhotos;
 
   factory _$ChildResponse([void Function(ChildResponseBuilder) updates]) =>
       (new ChildResponseBuilder()..update(updates)).build();
@@ -150,7 +164,8 @@ class _$ChildResponse extends ChildResponse {
       this.name,
       this.photoUrl,
       this.rating,
-      this.squad})
+      this.squad,
+      this.lastPhotos})
       : super._() {
     if (actionDuration == null) {
       throw new BuiltValueNullFieldError('ChildResponse', 'actionDuration');
@@ -204,7 +219,8 @@ class _$ChildResponse extends ChildResponse {
         name == other.name &&
         photoUrl == other.photoUrl &&
         rating == other.rating &&
-        squad == other.squad;
+        squad == other.squad &&
+        lastPhotos == other.lastPhotos;
   }
 
   @override
@@ -217,16 +233,18 @@ class _$ChildResponse extends ChildResponse {
                         $jc(
                             $jc(
                                 $jc(
-                                    $jc($jc(0, actionDuration.hashCode),
-                                        actionTimetable.hashCode),
-                                    bestFriends.hashCode),
-                                distance.hashCode),
-                            emotions.hashCode),
-                        energy.hashCode),
-                    name.hashCode),
-                photoUrl.hashCode),
-            rating.hashCode),
-        squad.hashCode));
+                                    $jc(
+                                        $jc($jc(0, actionDuration.hashCode),
+                                            actionTimetable.hashCode),
+                                        bestFriends.hashCode),
+                                    distance.hashCode),
+                                emotions.hashCode),
+                            energy.hashCode),
+                        name.hashCode),
+                    photoUrl.hashCode),
+                rating.hashCode),
+            squad.hashCode),
+        lastPhotos.hashCode));
   }
 
   @override
@@ -241,7 +259,8 @@ class _$ChildResponse extends ChildResponse {
           ..add('name', name)
           ..add('photoUrl', photoUrl)
           ..add('rating', rating)
-          ..add('squad', squad))
+          ..add('squad', squad)
+          ..add('lastPhotos', lastPhotos))
         .toString();
   }
 }
@@ -295,6 +314,12 @@ class ChildResponseBuilder
   String get squad => _$this._squad;
   set squad(String squad) => _$this._squad = squad;
 
+  SetBuilder<String> _lastPhotos;
+  SetBuilder<String> get lastPhotos =>
+      _$this._lastPhotos ??= new SetBuilder<String>();
+  set lastPhotos(SetBuilder<String> lastPhotos) =>
+      _$this._lastPhotos = lastPhotos;
+
   ChildResponseBuilder();
 
   ChildResponseBuilder get _$this {
@@ -309,6 +334,7 @@ class ChildResponseBuilder
       _photoUrl = _$v.photoUrl;
       _rating = _$v.rating;
       _squad = _$v.squad;
+      _lastPhotos = _$v.lastPhotos?.toBuilder();
       _$v = null;
     }
     return this;
@@ -342,7 +368,8 @@ class ChildResponseBuilder
               name: name,
               photoUrl: photoUrl,
               rating: rating,
-              squad: squad);
+              squad: squad,
+              lastPhotos: _lastPhotos?.build());
     } catch (_) {
       String _$failedField;
       try {
@@ -353,6 +380,9 @@ class ChildResponseBuilder
 
         _$failedField = 'emotions';
         emotions.build();
+
+        _$failedField = 'lastPhotos';
+        _lastPhotos?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'ChildResponse', _$failedField, e.toString());

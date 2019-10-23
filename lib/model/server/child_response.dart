@@ -30,6 +30,9 @@ abstract class ChildResponse
 
   String get squad;
 
+  @nullable
+  BuiltSet<String> get lastPhotos;
+
   ChildResponse._();
 
   factory ChildResponse([void Function(ChildResponseBuilder) updates]) =

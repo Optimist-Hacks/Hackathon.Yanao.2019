@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/service/api_service.dart';
 import 'package:flutter_app/service/preferences_service.dart';
 import 'package:flutter_app/ui/page/camera_page.dart';
+import 'package:flutter_app/ui/page/image_page.dart';
 import 'package:flutter_app/ui/page/login_page.dart';
 import 'package:flutter_app/ui/page/main_page.dart';
 import 'package:flutter_app/texts.dart';
@@ -30,10 +31,38 @@ class App extends StatelessWidget {
             appBarTheme: AppBarTheme(color: Colors.grey[50]),
             fontFamily: 'Averta CY',
           ),
-          routes: {
-            LoginPage.routeName: (context) => LoginPage(),
-            MainPage.routeName: (context) => MainPage(),
-            CameraPage.routeName: (context) => CameraPage(),
+          onGenerateRoute: (settings) {
+            if (settings.name == LoginPage.routeName) {
+              return MaterialPageRoute(
+                builder: (context) {
+                  return LoginPage();
+                },
+              );
+            } else if (settings.name == MainPage.routeName) {
+              return MaterialPageRoute(
+                builder: (context) {
+                  return MainPage();
+                },
+              );
+            } else if (settings.name == CameraPage.routeName) {
+              return MaterialPageRoute(
+                builder: (context) {
+                  return CameraPage();
+                },
+              );
+            } else if (settings.name == ImagePage.routeName) {
+              return MaterialPageRoute(
+                builder: (context) {
+                  return ImagePage(settings.arguments);
+                },
+              );
+            } else {
+              return MaterialPageRoute(
+                builder: (context) {
+                  return LoginPage();
+                },
+              );
+            }
           },
           home: Texts.isEmpty(
                   Provider.of<PreferencesService>(context).getCurrentUser())
