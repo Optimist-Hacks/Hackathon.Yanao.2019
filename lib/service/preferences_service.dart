@@ -19,4 +19,9 @@ class PreferencesService {
   void setChild(String childId) {
     PrefService.setString(_child, childId);
   }
+
+  Future<void> reset() async {
+    await PrefService.sharedPreferences.clear();
+    PrefService.clearCache();
+  }
 }

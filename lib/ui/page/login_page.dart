@@ -114,29 +114,37 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           SizedBox(height: 44.0),
-          SizedBox(
-            width: 212.0,
-            height: 50.0,
-            child: RaisedButton(
-              elevation: _state.buttonEnabled ? 2 : 0,
-              color: _state.buttonEnabled
-                  ? BerezkaColors.active
-                  : BerezkaColors.passive,
-              onPressed: _onClickLogin,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(22.0),
-              ),
-              child: Text(
-                Texts.enter,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 16,
-                  height: 1.115,
-                  fontWeight: FontWeight.w500,
-                  color: BerezkaColors.white,
+          Stack(
+            alignment: Alignment.center,
+            children: <Widget>[
+              SizedBox(
+                width: 212.0,
+                height: 50.0,
+                child: RaisedButton(
+                  elevation: _state.buttonEnabled ? 2 : 0,
+                  color: _state.buttonEnabled
+                      ? BerezkaColors.active
+                      : BerezkaColors.passive,
+                  onPressed: _onClickLogin,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(22.0),
+                  ),
+                  child: Text(
+                    Texts.enter,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 16,
+                      height: 1.115,
+                      fontWeight: FontWeight.w500,
+                      color: BerezkaColors.white,
+                    ),
+                  ),
                 ),
               ),
-            ),
+              _state.processing
+                  ? Center(child: CircularProgressIndicator())
+                  : Container(),
+            ],
           ),
         ],
       ),
@@ -150,6 +158,7 @@ class _LoginPageState extends State<LoginPage> {
 
   void _onClickLogin() async {
     Log.d(_tag, "On click login. Token = ${_getToken()}");
+    _loginBloc.setProcessing(true);
     final result = await _apiService.login(_getToken());
     if (result == null) {
       Log.e(_tag, "Login failed");
@@ -163,6 +172,7 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.popAndPushNamed(context, CameraPage.routeName);
       }
     }
+    _loginBloc.setProcessing(false);
   }
 
   String _getToken() {

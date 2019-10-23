@@ -9,13 +9,18 @@ part of 'login_state.dart';
 class _$LoginState extends LoginState {
   @override
   final bool buttonEnabled;
+  @override
+  final bool processing;
 
   factory _$LoginState([void Function(LoginStateBuilder) updates]) =>
       (new LoginStateBuilder()..update(updates)).build();
 
-  _$LoginState._({this.buttonEnabled}) : super._() {
+  _$LoginState._({this.buttonEnabled, this.processing}) : super._() {
     if (buttonEnabled == null) {
       throw new BuiltValueNullFieldError('LoginState', 'buttonEnabled');
+    }
+    if (processing == null) {
+      throw new BuiltValueNullFieldError('LoginState', 'processing');
     }
   }
 
@@ -29,18 +34,21 @@ class _$LoginState extends LoginState {
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is LoginState && buttonEnabled == other.buttonEnabled;
+    return other is LoginState &&
+        buttonEnabled == other.buttonEnabled &&
+        processing == other.processing;
   }
 
   @override
   int get hashCode {
-    return $jf($jc(0, buttonEnabled.hashCode));
+    return $jf($jc($jc(0, buttonEnabled.hashCode), processing.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('LoginState')
-          ..add('buttonEnabled', buttonEnabled))
+          ..add('buttonEnabled', buttonEnabled)
+          ..add('processing', processing))
         .toString();
   }
 }
@@ -53,11 +61,16 @@ class LoginStateBuilder implements Builder<LoginState, LoginStateBuilder> {
   set buttonEnabled(bool buttonEnabled) =>
       _$this._buttonEnabled = buttonEnabled;
 
+  bool _processing;
+  bool get processing => _$this._processing;
+  set processing(bool processing) => _$this._processing = processing;
+
   LoginStateBuilder();
 
   LoginStateBuilder get _$this {
     if (_$v != null) {
       _buttonEnabled = _$v.buttonEnabled;
+      _processing = _$v.processing;
       _$v = null;
     }
     return this;
@@ -78,7 +91,9 @@ class LoginStateBuilder implements Builder<LoginState, LoginStateBuilder> {
 
   @override
   _$LoginState build() {
-    final _$result = _$v ?? new _$LoginState._(buttonEnabled: buttonEnabled);
+    final _$result = _$v ??
+        new _$LoginState._(
+            buttonEnabled: buttonEnabled, processing: processing);
     replace(_$result);
     return _$result;
   }

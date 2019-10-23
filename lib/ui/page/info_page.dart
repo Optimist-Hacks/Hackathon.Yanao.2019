@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app.dart';
+import 'package:flutter_app/service/preferences_service.dart';
 import 'package:flutter_app/texts.dart';
 import 'package:flutter_app/ui/berezka_colors.dart';
 import 'package:flutter_app/ui/berezka_icons.dart';
 import 'package:flutter_app/ui/widget/dash.dart';
 import 'package:flutter_app/utils/log.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 const _tag = "info_page";
 
@@ -14,8 +17,11 @@ class InfoPage extends StatefulWidget {
 }
 
 class _InfoPageState extends State<InfoPage> {
+  PreferencesService _preferencesService;
+
   @override
   void didChangeDependencies() {
+    _preferencesService ??= Provider.of<PreferencesService>(context);
     super.didChangeDependencies();
   }
 
@@ -137,7 +143,7 @@ class _InfoPageState extends State<InfoPage> {
                       child: RaisedButton(
                         padding: EdgeInsets.zero,
                         elevation: 0.0,
-                        onPressed: () => _onClickPhone,
+                        onPressed: _onClickPhone,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),
                         ),
@@ -161,6 +167,33 @@ class _InfoPageState extends State<InfoPage> {
             _row("3 смена", "21 июня – 2 июл"),
             SizedBox(height: 15.0),
             _row("4 смена", "2 июля – 24 июля"),
+            SizedBox(height: 15.0),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              child: SizedBox(
+                width: double.maxFinite,
+                height: 50.0,
+                child: RaisedButton(
+                  padding: EdgeInsets.zero,
+                  elevation: 0.0,
+                  onPressed: _onClickExit,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                  ),
+                  color: BerezkaColors.passive,
+                  child: Text(
+                    Texts.exit,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w500,
+                      height: 1.111,
+                      color: BerezkaColors.active,
+                    ),
+                  ),
+                ),
+              ),
+            ),
             SizedBox(height: 15.0),
           ],
         ),
@@ -214,7 +247,7 @@ class _InfoPageState extends State<InfoPage> {
               child: RaisedButton(
                 padding: EdgeInsets.zero,
                 elevation: 0.0,
-                onPressed: () => _onClickPhone,
+                onPressed: _onClickBuy,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(18.0),
                 ),
@@ -237,7 +270,17 @@ class _InfoPageState extends State<InfoPage> {
     );
   }
 
+  void _onClickBuy() {
+    Log.d(_tag, "Click buy");
+  }
+
   void _onClickPhone() {
     Log.d(_tag, "Click phone");
+  }
+
+  void _onClickExit() {
+    Log.d(_tag, "Click exit");
+    _preferencesService.reset();
+    RestartWidget.restartApp(context);
   }
 }

@@ -8,12 +8,18 @@ class LoginBloc {
   Stream<LoginState> get state => _stateSubject;
 
   LoginBloc() {
-    initState = LoginState((b) => b..buttonEnabled = false);
+    initState = LoginState((b) => b
+      ..buttonEnabled = false
+      ..processing = false);
     _stateSubject.add(initState);
   }
 
   void onChangeTokenLength(int length) {
     _updateState((b) => b..buttonEnabled = length > 1);
+  }
+
+  void setProcessing(bool processing) {
+    _updateState((b) => b..processing = processing);
   }
 
   void _updateState(updates(LoginStateBuilder builder)) {

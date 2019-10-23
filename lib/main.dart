@@ -5,5 +5,5 @@ import 'package:preferences/preference_service.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await PrefService.init(prefix: 'pref_');
-  runApp(App());
+  runApp(RestartWidget(child: App()));
 }

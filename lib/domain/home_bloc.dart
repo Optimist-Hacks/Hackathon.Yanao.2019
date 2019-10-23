@@ -55,13 +55,16 @@ class HomeBloc {
 
     final moods = BuiltMap<Mood, int>({
       Mood.funny:
-          (response.emotions.happiness + response.emotions.surprise).ceil(),
-      Mood.calm: response.emotions.neutral.ceil(),
-      Mood.sad: (response.emotions.contempt +
-              response.emotions.disgust +
-              response.emotions.sadness)
+          ((response.emotions.happiness + response.emotions.surprise) * 100)
+              .ceil(),
+      Mood.calm: (response.emotions.neutral * 100).ceil(),
+      Mood.sad: ((response.emotions.contempt +
+                  response.emotions.disgust +
+                  response.emotions.sadness) *
+              100)
           .ceil(),
-      Mood.angry: (response.emotions.anger + response.emotions.fear).ceil(),
+      Mood.angry:
+          ((response.emotions.anger + response.emotions.fear) * 100).ceil(),
     }).toBuilder();
 
     _updateState((b) => b

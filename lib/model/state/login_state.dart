@@ -6,6 +6,8 @@ part 'login_state.g.dart';
 abstract class LoginState implements Built<LoginState, LoginStateBuilder> {
   bool get buttonEnabled;
 
+  bool get processing;
+
   LoginState._();
 
   factory LoginState([void Function(LoginStateBuilder) updates]) = _$LoginState;
