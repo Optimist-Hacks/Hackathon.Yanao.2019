@@ -156,7 +156,14 @@ class _CameraPageState extends State<CameraPage> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           // If the Future is complete, display the preview
-          return CameraPreview(_controller);
+          return Transform.scale(
+            scale: 1 / _controller.value.aspectRatio,
+            child: new Center(
+              child: new AspectRatio(
+                  aspectRatio: _controller.value.aspectRatio,
+                  child: new CameraPreview(_controller)),
+            ),
+          );
         } else {
           // Otherwise, display a loading indicator
           return Container(
