@@ -82,6 +82,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
           SizedBox(height: 24.0),
           TextField(
+            autofocus: true,
             maxLines: 1,
             controller: _textController,
             textAlign: TextAlign.center,
@@ -100,13 +101,16 @@ class _LoginPageState extends State<LoginPage> {
             color: BerezkaColors.title.withOpacity(0.1),
           ),
           SizedBox(height: 17.0),
-          Text(
-            Texts.inviteDescription,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: BerezkaColors.title.withOpacity(0.5),
-              fontSize: 17,
-              height: 1.11,
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 40.0),
+            child: Text(
+              Texts.inviteDescription,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: BerezkaColors.title.withOpacity(0.5),
+                fontSize: 17,
+                height: 1.11,
+              ),
             ),
           ),
           SizedBox(height: 44.0),
